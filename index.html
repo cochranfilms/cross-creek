@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cross Creek Realty — Digital Upgrade Proposal | Cochran Films</title>
+    <meta name="description" content="A focused, corporate-grade proposal for Cross Creek Realty: website reboot, IDX reliability, conversion system, and media production.">
+    <style>
+      :root {
+        --ink: #0b0e2a;       /* deep navy */
+        --gold: #c7a86b;      /* refined gold */
+        --slate: #2f3446;
+        --soft: #f7f7f9;
+        --muted: #7b8093;
+        --card: #ffffff;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        color: #1b1e2b;
+        background: var(--soft);
+        line-height: 1.5;
+      }
+      a { color: var(--gold); text-decoration: none; }
+      .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+      .nav {
+        position: sticky; top: 0; z-index: 10; backdrop-filter: blur(6px);
+        background: rgba(11,14,42,.9); border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+      .brand { color: #fff; font-weight: 700; letter-spacing: .6px; }
+      .brand small { color: var(--gold); font-weight: 600; }
+      .nav a { color: #e9ecf4; margin-left: 18px; font-weight: 600; font-size: 14px; opacity: .95; }
+
+      .hero {
+        color: #fff; background: radial-gradient(1200px 400px at 65% 10%, rgba(199,168,107,.25), transparent 60%), var(--ink);
+        border-bottom: 1px solid rgba(255,255,255,.1);
+      }
+      .hero-inner { padding: 80px 0 56px; display: grid; grid-template-columns: 1.3fr .7fr; gap: 40px; align-items: end; }
+      .kicker { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 12px; }
+      h1 { margin: 10px 0 12px; font-size: 40px; line-height: 1.15; color: #fff; }
+      .sub { color: #cfd5e6; max-width: 720px; }
+      .hero-card {
+        background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+        border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 18px; color: #e9ecf4;
+      }
+      .hero-card b { color: #fff; }
+      .btns { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
+      .btn { display: inline-block; padding: 12px 18px; border-radius: 10px; border: 1px solid transparent; font-weight: 700; letter-spacing: .3px; }
+      .btn.primary { background: var(--gold); color: #111; }
+      .btn.ghost { border-color: rgba(255,255,255,.35); color: #fff; }
+
+      section { padding: 64px 0; }
+      h2 { font-size: 28px; margin: 0 0 16px; color: var(--ink); }
+      .lead { color: var(--muted); max-width: 880px; }
+
+      .cards { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+      .card { background: var(--card); border: 1px solid #e9e9ee; border-radius: 14px; padding: 18px; grid-column: span 4; }
+      .card h3 { margin: 8px 0 10px; }
+      .pill { display: inline-block; padding: 6px 10px; border-radius: 999px; background: #f1efe9; color: #5a4a22; font-weight: 700; font-size: 12px; letter-spacing: .3px; }
+      ul.clean { margin: 8px 0 0 0; padding: 0 0 0 16px; }
+      ul.clean li { margin: 6px 0; }
+
+      .pricing { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; align-items: stretch; }
+      .tier { background: var(--card); border: 1px solid #e6e6ef; border-radius: 16px; padding: 22px; grid-column: span 4; display: flex; flex-direction: column; }
+      .tier h3 { margin: 0; }
+      .price { font-weight: 800; font-size: 28px; color: var(--ink); margin: 8px 0 2px; }
+      .note { color: var(--muted); font-size: 13px; }
+      .tier ul { margin: 12px 0; padding-left: 18px; }
+      .tier .cta { margin-top: auto; }
+
+      .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
+      .gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid #e6e6ef; grid-column: span 4; }
+
+      .dark { background: var(--ink); color: #e9ecf4; }
+      .dark h2 { color: #fff; }
+      .dark .panel { background: #121739; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 18px; }
+
+      .foot { padding: 28px 0 60px; color: #9aa1b6; font-size: 14px; }
+
+      @media (max-width: 960px) {
+        .hero-inner { grid-template-columns: 1fr; padding: 56px 0 42px; }
+        .cards .card, .pricing .tier, .gallery img { grid-column: span 12; height: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="wrap nav-inner">
+        <div class="brand">Cochran Films <small>— Proposal</small></div>
+        <div>
+          <a href="#summary">Summary</a>
+          <a href="#scope">Scope</a>
+          <a href="#pricing">Investment</a>
+          <a href="#ongoing">Ongoing</a>
+          <a href="#work">Visuals</a>
+        </div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <div class="kicker">Cross Creek Realty — Digital Upgrade</div>
+          <h1>Website Reboot + Listing Media that Converts</h1>
+          <p class="sub">A corporate‑grade refresh that fixes IDX reliability, clarifies buyer/seller/agent journeys, and elevates brand presentation with on‑site video and photography. Built to launch fast and scale into an always‑on content engine.</p>
+          <div class="btns">
+            <a class="btn primary" href="#pricing">See Investment Options</a>
+            <a class="btn ghost" href="#scope">What You Get</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="kicker">Highlights</div>
+          <ul class="clean">
+            <li><b>IDX/MLS stability</b> with graceful fallbacks and lead capture when feeds fail</li>
+            <li><b>Two‑path conversion</b> for Buyers and Sellers with clear CTAs</li>
+            <li><b>Local authority</b> via market pages, schema, and SEO foundations</li>
+            <li><b>On‑brand media</b> to showcase properties, team, and events</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <section id="summary">
+      <div class="wrap">
+        <h2>Executive Summary</h2>
+        <p class="lead">Your current site provides the essentials but is held back by unreliable IDX modules, placeholder KPIs, and fragmented conversion paths. Our plan focuses on credibility, conversion, and content. We’ll stabilize the listing experience, replace placeholders with verifiable metrics, and give buyers and sellers clear next steps — then support it with premium video/photography to drive trust.</p>
+
+        <div class="cards" style="margin-top:14px;">
+          <div class="card">
+            <span class="pill">Reliability</span>
+            <h3>Fix IDX + Account Tools</h3>
+            <ul class="clean">
+              <li>Resolve "Listings not found" states with a graceful fallback form</li>
+              <li>Repair organizer/login; enable saved searches and alerts</li>
+              <li>Replace placeholder KPIs with GA4/CRM‑backed metrics</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Conversion</span>
+            <h3>Buyer & Seller Journeys</h3>
+            <ul class="clean">
+              <li>Above‑the‑fold CTAs: See Homes Near Me, Schedule a Tour</li>
+              <li>Seller path: Valuation → Marketing Plan → Close, with proof of reach</li>
+              <li>Agent directory filters + book‑a‑meeting actions</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Authority</span>
+            <h3>Local Market Content</h3>
+            <ul class="clean">
+              <li>Community pages with live listings and open houses</li>
+              <li>Micro‑market stats, schools, and neighborhood highlights</li>
+              <li>SEO foundations with schema: LocalBusiness, RealEstateAgent, FAQ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scope" class="dark">
+      <div class="wrap">
+        <h2>Scope — Web Reboot (Now)</h2>
+        <div class="panel">
+          <ul class="clean">
+            <li><b>Design & Build:</b> High‑end, mobile‑first site with clear Buyer, Seller, and Agent paths; performance and accessibility improvements.</li>
+            <li><b>IDX/MLS:</b> Health check and stabilization; visible empty‑state with inquiry capture when feeds are unavailable.</li>
+            <li><b>Conversion:</b> Property cards with Ask/Save/Schedule; 60‑second buyer quiz replaces long intake forms.</li>
+            <li><b>Content:</b> Enhanced community pages; homepage storytelling with real metrics and recent sales.</li>
+            <li><b>SEO & Analytics:</b> Technical SEO, schema, GA4 events, Google Search Console, and performance tuning.</li>
+            <li><b>Launch:</b> Domain, SSL, and uptime monitoring; 30‑day post‑launch support.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <h2>Investment Options</h2>
+        <p class="lead">Three ways to move now. Each option includes the website reboot and a media package sized to your near‑term priorities. Flat, project‑based pricing — no hourly billing.</p>
+
+        <div class="pricing" style="margin-top:18px;">
+          <div class="tier">
+            <span class="pill">Option A — Essential Launch</span>
+            <h3>Business‑grade reboot + starter media</h3>
+            <div class="price">$2,800 all‑in</div>
+            <div class="note">Best for: fast launch and initial listings</div>
+            <ul>
+              <li>Website: Business Pro (3–5 pages, mobile optimized, SEO foundations)</li>
+              <li>Video: 2 hours on‑site + 60‑sec recap</li>
+              <li>Photo: Prime Exposure (2 hours, full editing, online gallery)</li>
+              <li>IDX health check and graceful empty‑state capture</li>
+              <li>GA4 + Search Console integration</li>
+            </ul>
+            <a class="btn primary cta" href="#next">Select Option A</a>
+          </div>
+
+          <div class="tier" style="border-width:2px; border-color: var(--gold); box-shadow: 0 8px 28px rgba(11,14,42,.08);">
+            <span class="pill">Option B — Growth</span>
+            <h3>Brand expansion + property storytelling</h3>
+            <div class="price">$4,800 all‑in</div>
+            <div class="note">Best for: relaunch + multi‑property content</div>
+            <ul>
+              <li>Website: Brand Builder (6–10 pages, branding, blog optional)</li>
+              <li>Video: 3 hours on‑site + 60‑sec recap</li>
+              <li>Photo: Legacy Capture (3 hours, advanced editing + highlights)</li>
+              <li>1 premium community/market page with stats and schema</li>
+              <li>30‑day support and optimization sprint</li>
+            </ul>
+            <a class="btn primary cta" href="#next">Select Option B</a>
+          </div>
+
+          <div class="tier">
+            <span class="pill">Option C — Complete Relaunch</span>
+            <h3>Full brand site + full‑day production</h3>
+            <div class="price">$5,600 all‑in</div>
+            <div class="note">Best for: comprehensive relaunch and recruiting</div>
+            <ul>
+              <li>Website: Brand Builder with CRM/Newsletter and agent directory</li>
+              <li>Video: 8‑hour production day + 60‑sec recap</li>
+              <li>Photo: Legacy Capture (3 hours) + team headshots</li>
+              <li>2 premium community/market pages + SEO schema suite</li>
+              <li>Launch reporting and training</li>
+            </ul>
+            <a class="btn primary cta" href="#next">Select Option C</a>
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:10px;">A‑la‑carte reference rates (for clarity, already reflected in the package values): Website Starter $750, Business Pro $1,250, Brand Builder $2,500. Video: 2h $750, 3h $750, 5h $1,250, 8h + recap $2,200. Photo: Prime $600, Legacy $900. IDX provider and MLS fees (if applicable) are billed at cost.</p>
+      </div>
+    </section>
+
+    <section id="ongoing" class="dark">
+      <div class="wrap">
+        <h2>Ongoing Content Program (Optional)</h2>
+        <div class="panel">
+          <p class="lead" style="color:#cfd5e6;">If you’d like consistent event coverage and listing content, choose a monthly track. Each includes planning, on‑site production, editing, and delivery to your brand library.</p>
+          <div class="cards" style="margin-top:10px;">
+            <div class="card" style="background:#0f1535;border-color:rgba(255,255,255,.08);color:#e9ecf4;">
+              <h3>Lite — $1,500/mo</h3>
+              <ul class="clean">
+                <li>1 half‑day shoot (video + photo) per month</li>
+                <li>1 x 60‑sec recap + 8–12 edited photos</li>
+                <li>Content calendar + drive delivery</li>
+              </ul>
+            </div>
+            <div class="card" style="background:#0f1535;border-color:rgba(255,255,255,.08);color:#e9ecf4;">
+              <h3>Standard — $3,000/mo</h3>
+              <ul class="clean">
+                <li>2 half‑days or 1 full‑day production</li>
+                <li>2 x 60‑sec edits + 20–30 photos</li>
+                <li>Community page updates and blog briefs</li>
+              </ul>
+            </div>
+            <div class="card" style="background:#0f1535;border-color:rgba(255,255,255,.08);color:#e9ecf4;">
+              <h3>Pro — $5,000/mo</h3>
+              <ul class="clean">
+                <li>2 full‑days or 4 half‑days across teams/properties</li>
+                <li>4 x 60–90 sec edits + photo sets per property</li>
+                <li>Quarterly market video + agent recruiting assets</li>
+              </ul>
+            </div>
+          </div>
+          <p class="note" style="margin-top:10px;">All monthly plans are cancel‑anytime after 3 months. Unused production rolls over within the quarter.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <h2>Findings & Visuals</h2>
+        <p class="lead">Select screenshots from the current experience and domain setup. During build we replace placeholders with verifiable metrics and create reliable flows.</p>
+        <div class="gallery" style="margin-top:12px;">
+          <img alt="Domain configuration" src="./Screenshot%202025-08-19%20at%2011.22.46%E2%80%AFAM.png">
+          <img alt="DNS entry input" src="./Screenshot%202025-08-19%20at%2011.25.26%E2%80%AFAM.png">
+          <img alt="Header UI example" src="./Screenshot%202025-08-19%20at%2011.26.47%E2%80%AFAM.png">
+          <img alt="Analytics slide example" src="./Screenshot%202025-08-19%20at%2011.26.52%E2%80%AFAM.png">
+          <img alt="Form error message" src="./Screenshot%202025-08-19%20at%2011.26.59%E2%80%AFAM.png">
+          <img alt="Home form layout" src="./Screenshot%202025-08-19%20at%206.27.42%E2%80%AFAM.png">
+          <img alt="Hero contact section" src="./Screenshot%202025-08-19%20at%206.27.50%E2%80%AFAM.png">
+        </div>
+      </div>
+    </section>
+
+    <section id="next" class="dark">
+      <div class="wrap">
+        <h2>Next Steps</h2>
+        <div class="panel">
+          <ul class="clean" style="color:#cfd5e6;">
+            <li>Select an option (A, B, or C) and confirm target launch date</li>
+            <li>We provision the project, confirm IDX provider details, and begin design</li>
+            <li>Media day scheduled; delivery of edit(s) and photo galleries within 1-3 days</li>
+            <li>Go‑live with QA, analytics, and training; 30‑day optimization window</li>
+          </ul>
+          <div class="btns">
+            <a class="btn primary" href="mailto:hello@cochranfilms.com?subject=Cross%20Creek%20—%20Proposal%20Acceptance">Approve & Schedule</a>
+            <a class="btn ghost" href="#pricing">Compare Options</a>
+          </div>
+        </div>
+        <p class="note" style="margin-top:10px;">Prepared by Cochran Films. Pricing valid for 30 days. Hosting, IDX licensing, and third‑party fees (if required) are billed at cost.</p>
+      </div>
+    </section>
+
+    <div class="wrap foot">
+      <div>© 2025 Cochran Films — Confidential. For Cross Creek Realty review.</div>
+    </div>
+  </body>
+</html>
+
+

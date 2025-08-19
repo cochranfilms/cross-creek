@@ -71,7 +71,9 @@
       .tier .cta { margin-top: auto; }
 
       .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
-      .gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid #e6e6ef; grid-column: span 4; }
+      .gallery figure { grid-column: span 4; margin: 0; }
+      .gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid #e6e6ef; }
+      .gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
       .dark { background: var(--ink); color: #e9ecf4; }
       .dark h2 { color: #fff; }
@@ -81,7 +83,7 @@
 
       @media (max-width: 960px) {
         .hero-inner { grid-template-columns: 1fr; padding: 56px 0 42px; }
-        .cards .card, .pricing .tier, .gallery img { grid-column: span 12; height: auto; }
+        .cards .card, .pricing .tier, .gallery figure { grid-column: span 12; height: auto; }
       }
     </style>
   </head>
@@ -171,6 +173,43 @@
             <li><b>SEO (Search Engine Optimization) & Analytics:</b> Technical SEO (Search Engine Optimization), schema, GA4 (Google Analytics 4) events, Google Search Console, and performance tuning.</li>
             <li><b>Launch:</b> Domain, SSL (Secure Sockets Layer), and uptime monitoring; 30‑day post‑launch support.</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <h2>Findings & Visuals</h2>
+        <p class="lead">Select screenshots from the current experience and domain setup. During build we replace placeholders with verifiable metrics and create reliable flows.</p>
+        <div class="gallery" style="margin-top:12px;">
+          <figure>
+            <img alt="Visual 1" src="./1.png">
+            <figcaption>Language selector displays unlabeled icons; users cannot determine the selected language, reducing accessibility and clarity.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 2" src="./2.png">
+            <figcaption>Headline KPI (Key Performance Indicator) claims “3 MILLION VISITS PER MONTH” without a cited source; this appears non‑credible and risks trust.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 3" src="./3.png">
+            <figcaption>Duplicate mini‑contact form above the primary form provides no defined next step; creates a “wait to hear back” experience instead of scheduling or confirmation.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 4" src="./4.png">
+            <figcaption>Frequent generic error state (“Sorry we are experiencing system issues. Please try again.”) blocks conversion without guidance or an alternate path.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 5" src="./5.png">
+            <figcaption>Single, generic form for buyers, sellers, and agents lacks tailored workflows; lowers lead qualification and follow‑through.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 6" src="./6.png">
+            <figcaption>Hero/banner uses stock footage unrelated to Atlanta inventory (e.g., beach condo); undermines brand authenticity. Replace with original Cross Creek footage from production days.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 7" src="./7.png">
+            <figcaption>Community pages are thin: limited local data, missing CTAs (Calls To Action), and no automation (saved searches, open‑house alerts) to generate leads.</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -267,20 +306,7 @@
       </div>
     </section>
 
-    <section id="work">
-      <div class="wrap">
-        <h2>Findings & Visuals</h2>
-        <p class="lead">Select screenshots from the current experience and domain setup. During build we replace placeholders with verifiable metrics and create reliable flows.</p>
-        <div class="gallery" style="margin-top:12px;">
-          <img alt="Visual 1" src="./1.png">
-          <img alt="Visual 2" src="./2.png">
-          <img alt="Visual 3" src="./3.png">
-          <img alt="Visual 4" src="./4.png">
-          <img alt="Visual 5" src="./5.png">
-          
-        </div>
-      </div>
-    </section>
+    
 
     <section id="next" class="dark">
       <div class="wrap">

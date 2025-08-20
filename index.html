@@ -103,6 +103,17 @@
 
       .foot { padding: 28px 0 60px; color: #9aa1b6; font-size: 14px; }
 
+      /* External site preview */
+      .preview { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #e6e6ef; background: #0b0e2a; display: block; }
+      .preview::before { content: ""; display: block; padding-top: 56.25%; }
+      .preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .96; }
+      .preview .bar { position: absolute; left: 0; right: 0; top: 0; height: 34px; background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.66)); border-bottom: 1px solid rgba(0,0,0,.08); display: flex; align-items: center; gap: 6px; padding: 0 10px; }
+      .preview .dot { width: 10px; height: 10px; border-radius: 999px; }
+      .preview .dot.r { background: #ff5f57; }
+      .preview .dot.y { background: #febc2e; }
+      .preview .dot.g { background: #28c840; }
+      .preview .cta { position: absolute; right: 10px; bottom: 10px; background: rgba(255,255,255,.92); color: #111; border-radius: 999px; padding: 6px 10px; font-weight: 800; }
+
       @media (max-width: 960px) {
         .hero-inner { grid-template-columns: 1fr; padding: 56px 0 42px; }
         .cards .card, .pricing .tier, .gallery figure { grid-column: span 12; height: auto; }
@@ -202,6 +213,65 @@
       </div>
     </section>
 
+    <section id="readme">
+      <div class="wrap">
+        <h2>README — IDX Demo & MLS Integration</h2>
+        <p class="lead">The interactive demo showcases the buyer and seller experience we can roll out on your site. When connected to your MLS (IDX), the same interface delivers live listings, strengthens brand credibility, and converts more visitors into real leads — faster.</p>
+
+        <div class="cards" style="margin-top:14px;">
+          <div class="card" style="grid-column: span 6;">
+            <span class="pill">Buyer Experience</span>
+            <h3>Tools that move buyers to action</h3>
+            <ul class="clean">
+              <li><b>Smart filters</b> with grid/list toggle and shareable search links</li>
+              <li><b>Saved searches + alerts</b> (local storage demo, IDX-ready in production)</li>
+              <li><b>Favorites and recent views</b> to keep momentum</li>
+              <li><b>Tour scheduling</b> with downloadable calendar files (ICS)</li>
+              <li><b>Media‑rich listings</b>: photos, video, and a <b>3D/Matterport tour</b></li>
+              <li><b>Payment estimates</b> and a full mortgage calculator</li>
+              <li><b>Comparable listings</b> for quick context and confidence</li>
+            </ul>
+          </div>
+          <div class="card" style="grid-column: span 6;">
+            <span class="pill">Seller & Platform</span>
+            <h3>Proof, process, and lead capture</h3>
+            <ul class="clean">
+              <li><b>Seller highlights</b>: recent results slider, listing process, and net estimator</li>
+              <li><b>Valuation request</b> mini‑form capturing CRM‑ready payloads</li>
+              <li><b>Community follows</b> to build buyer demand ahead of launch</li>
+              <li><b>Lead capture</b> at key moments with clean, short forms</li>
+              <li><b>Schema & analytics ready</b>: LocalBusiness JSON‑LD, GA4/CRM hooks</li>
+              <li><b>Fast, mobile‑first</b> UX with lazy‑loading media and reduced‑motion support</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cards" style="margin-top:14px;">
+          <div class="card" style="grid-column: span 12;">
+            <span class="pill">Why MLS/IDX matters</span>
+            <h3>Trust + speed = more qualified leads</h3>
+            <ul class="clean">
+              <li><b>Live, accurate data</b> direct from the MLS builds credibility and reduces bounce</li>
+              <li><b>Continuous sync</b> means new listings and price changes trigger alerts quickly</li>
+              <li><b>Fewer dead ends</b>: graceful fallbacks capture the lead even if data hiccups</li>
+              <li><b>Brand lift</b>: on‑brand media and UI around verified data positions Cross Creek as the trusted source</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="video-grid" style="margin-top:12px;">
+          <div class="video">
+            <iframe src="https://my.matterport.com/show/?m=JFdHyZdKqRh&play=1&brand=0" allow="fullscreen; xr-spatial-tracking" allowfullscreen loading="lazy" title="3D Tour — Matterport"></iframe>
+          </div>
+        </div>
+
+        <div class="btns" style="margin-top:12px;">
+          <a class="btn primary" href="./idx-demo.html">Open the Live IDX Demo</a>
+          <a class="btn ghost" href="./idx-demo.html#saved">Try saved searches & alerts</a>
+        </div>
+      </div>
+    </section>
+
     <section id="work">
       <div class="wrap">
         <h2>Findings & Visuals</h2>
@@ -243,6 +313,37 @@
             <img alt="Visual 9" src="./9.png">
             <figcaption>There appears to be another site at crosscreekatl.com using the older brand; we’ll consolidate and align both so the experience feels consistent.</figcaption>
           </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="benchmark">
+      <div class="wrap">
+        <h2>Benchmark — Live IDX in the wild</h2>
+        <p class="lead">Here’s what a strong, live MLS (IDX) integration looks like in practice. <a href="https://www.premieratlantarealestate.com/" target="_blank" rel="noopener">Premier Atlanta Real Estate</a> pairs on‑brand content with searchable, constantly updated listings. This is the kind of clarity and trust we can bring to Cross Creek.</p>
+
+        <div class="cards" style="margin-top:14px;">
+          <div class="card" style="grid-column: span 7;">
+            <a class="preview" href="https://www.premieratlantarealestate.com/" target="_blank" rel="noopener" title="Open Premier Atlanta Real Estate">
+              <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+              <img src="./DJI_0276.jpg" alt="Premier Atlanta Real Estate — example of live IDX listings" loading="lazy">
+              <span class="cta">View live site →</span>
+            </a>
+          </div>
+          <div class="card" style="grid-column: span 5;">
+            <span class="pill">What they do well</span>
+            <h3>Credible listings that convert</h3>
+            <ul class="clean">
+              <li><b>Instant search</b> backed by the MLS — trustable and current</li>
+              <li><b>Community landing pages</b> that group listings around neighborhoods</li>
+              <li><b>On‑brand presentation</b> around verified data (photos, maps, stats)</li>
+              <li><b>Clear paths</b> to save, schedule, and ask questions</li>
+            </ul>
+            <div class="btns" style="margin-top:12px;">
+              <a class="btn primary" href="./idx-demo.html">See our interactive demo</a>
+              <a class="btn ghost" href="https://www.premieratlantarealestate.com/" target="_blank" rel="noopener">Open benchmark</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

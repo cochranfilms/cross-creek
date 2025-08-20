@@ -11,6 +11,9 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="./logo.webp">
     <meta name="twitter:card" content="summary_large_image">
+    <link rel="preload" as="image" href="./CC__1871-HDR.jpg">
+    <link rel="preload" as="image" href="./DJI_0276.jpg">
+    <link rel="preload" as="image" href="./Liberty_Communities_Preview_NOWM.jpg">
     <style>
       :root {
         --ink: #0b0e2a;
@@ -127,6 +130,7 @@
       .topbar a { color: #e9ecf4; opacity: .9; }
       .top-actions { display: flex; gap: 10px; align-items: center; }
       .top-cta { background: #fff7e6; color: #111; padding: 6px 10px; border-radius: 8px; font-weight: 700; }
+      .topbar .top-cta { color: #111; opacity: 1; }
 
       .nav .menu a { margin-left: 16px; }
       .pill.count { background: #e6f7f0; color: #0b8f64; border-radius: 999px; padding: 2px 8px; font-weight: 800; font-size: 12px; margin-left: 6px; }
@@ -187,6 +191,54 @@
       .small { font-size: 12px; color: var(--muted); }
       .pill.badge { background: #e6f7f0; color: #0b8f64; }
 
+      /* Unified Professional Form Theme */
+      input, select, textarea {
+        -webkit-appearance: none;
+        appearance: none;
+        background: #ffffff !important;
+        color: #111 !important;
+        border: 1px solid #dcdced !important;
+        border-radius: 12px !important;
+        padding: 12px 12px !important;
+        font-size: 14px;
+        box-shadow: 0 1px 0 rgba(11,14,42,.03);
+        transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+        outline: none;
+      }
+      input:hover, select:hover, textarea:hover { border-color: #c9cbe0 !important; }
+      input:focus, select:focus, textarea:focus {
+        border-color: var(--gold) !important;
+        box-shadow: 0 0 0 4px rgba(199,168,107,.15), 0 1px 0 rgba(11,14,42,.05) !important;
+      }
+      input::placeholder, textarea::placeholder { color: #9aa1b6 !important; }
+      input:disabled, select:disabled, textarea:disabled { background: #f2f3f7 !important; color: #9aa1b6 !important; }
+      input[type=number]::-webkit-outer-spin-button,
+      input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+      input[type=number] { -moz-appearance: textfield; }
+      select {
+        background-image: url("data:image/svg+xml;utf8,<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' fill='%237b8093'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 14px 14px;
+        padding-right: 38px !important;
+      }
+      .filters .field:focus-within label { color: var(--gold); }
+
+      /* Dark-panel variant for Sell section */
+      .sell .panel-dark input,
+      .sell .panel-dark select,
+      .sell .panel-dark textarea {
+        background: rgba(255,255,255,.06) !important;
+        color: #e9ecf4 !important;
+        border-color: rgba(255,255,255,.22) !important;
+        box-shadow: none;
+      }
+      .sell .panel-dark input::placeholder,
+      .sell .panel-dark textarea::placeholder { color: rgba(233,236,244,.75) !important; }
+      .sell .panel-dark select {
+        background-image: url("data:image/svg+xml;utf8,<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' fill='%23e9ecf4'><path d='M7 10l5 5 5-5z'/></svg>");
+      }
+
       @media (max-width: 980px) {
         .hero-inner { grid-template-columns: 1fr; }
         .filters .field { grid-column: span 6; }
@@ -194,6 +246,76 @@
         .card { grid-column: span 12; }
         .sheet-body { grid-template-columns: 1fr; }
         .grid.list .card { grid-template-columns: 1fr; }
+      }
+
+      /* Slider */
+      .slider { position: relative; overflow: hidden; border-radius: 14px; border: 1px solid #e6e6ef; background: #000; }
+      .slides { display: flex; transition: transform .6s ease; }
+      .slide { position: relative; min-width: 100%; height: 380px; }
+      .slide img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.02); }
+      .slide .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.45)); }
+      .slide .caption { position: absolute; left: 16px; right: 16px; bottom: 16px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5); }
+      .slider .ctrl { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.45); color: #fff; border: 0; width: 38px; height: 38px; border-radius: 999px; display: grid; place-items: center; cursor: pointer; }
+      .slider .prev { left: 10px; }
+      .slider .next { right: 10px; }
+      .slider .dots { position: absolute; left: 0; right: 0; bottom: 8px; display: flex; gap: 6px; justify-content: center; }
+      .slider .dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,.5); border: 1px solid rgba(0,0,0,.2); cursor: pointer; }
+      .slider .dot.active { background: var(--gold); }
+
+      /* Logos / trust */
+      .logo-row { display: grid; grid-auto-flow: column; grid-auto-columns: max-content; gap: 18px; align-items: center; justify-content: start; }
+      .logo-pill { background: #fff; border: 1px solid #e6e6ef; border-radius: 999px; padding: 8px 12px; font-weight: 800; color: var(--slate); font-size: 12px; letter-spacing: .3px; }
+
+      /* Stats */
+      .stats { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 12px; }
+      .stat { grid-column: span 3; background: #fff; border: 1px solid #e6e6ef; border-radius: 12px; padding: 16px; text-align: center; }
+      .stat b { display: block; font-size: 28px; color: var(--ink); }
+      .stat .label { color: var(--muted); font-size: 13px; }
+
+      /* Testimonials */
+      .testimonials .slide { height: auto; background: #fff; color: #111; display: grid; align-content: center; }
+      .testimonial { padding: 20px; display: grid; gap: 8px; }
+      .testimonial .who { display: flex; gap: 10px; align-items: center; }
+      .avatar { width: 40px; height: 40px; border-radius: 999px; background: #e6e6ef; overflow: hidden; }
+      .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .quote { font-size: 16px; color: #333; }
+
+      /* Sell with us */
+      .sell { background: radial-gradient(800px 260px at 85% -10%, rgba(199,168,107,.10), transparent 60%), var(--ink); color: #cfd5e6; }
+      .sell h2 { color: #fff; }
+      .sell .two { align-items: center; }
+      .sell .card { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.04); }
+      .sell .panel-dark { background: rgba(255,255,255,.04); color: #e9ecf4; border-color: rgba(255,255,255,.14); }
+      .process { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+      .step { grid-column: span 3; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 12px; }
+      .step b { color: #fff; }
+      .metric { display: inline-block; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18); color: #fff; font-weight: 800; border-radius: 999px; padding: 4px 8px; font-size: 12px; }
+
+      .net { display: grid; gap: 8px; }
+      .net input { background: #fff; color: #111; border: 1px solid #dcdced; border-radius: 10px; padding: 10px; }
+      .net .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .net .out { margin-top: 8px; font-size: 14px; }
+
+      .sales .slide { height: 240px; }
+      .sales .caption b { font-size: 18px; }
+      .sales .caption .small { color: #e9ecf4; }
+
+      /* Map teaser */
+      .map-teaser { border: 1px solid #e6e6ef; border-radius: 12px; overflow: hidden; background: #0b0e2a; position: relative; }
+      .map-teaser::before { content: ""; display: block; padding-top: 50%; }
+      .map-teaser img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .85; }
+      .map-teaser .mask { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.0)); }
+      .map-teaser .atop { position: absolute; left: 12px; right: 12px; bottom: 12px; color: #fff; display: flex; align-items: center; justify-content: space-between; }
+
+      /* Sticky CTA */
+      .sticky-cta { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50; background: #111; color: #fff; border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.12); }
+      .sticky-cta .btn { background: var(--gold); color: #111; }
+      .sticky-cta .small { color: #cfd5e6; }
+
+      @media (max-width: 980px) {
+        .slide { height: 240px; }
+        .stat { grid-column: span 6; }
+        .logo-row { grid-auto-flow: row; grid-template-columns: repeat(2, max-content); }
       }
     </style>
   </head>
@@ -255,6 +377,57 @@
       </div>
     </header>
 
+    <section id="trust">
+      <div class="wrap" style="padding:22px 0 8px;">
+        <div class="logo-row" aria-label="Trusted by">
+          <div class="logo-pill">MLS‑Ready</div>
+          <div class="logo-pill">Matterport 3D</div>
+          <div class="logo-pill">Drone Media</div>
+          <div class="logo-pill">Secure Lead Capture</div>
+          <div class="logo-pill">IDX Compliance</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="showcase">
+      <div class="wrap">
+        <div class="slider" id="showcaseSlider" aria-roledescription="carousel">
+          <div class="slides">
+            <div class="slide">
+              <img src="./CC__1871-HDR.jpg" alt="Clubhouse and pool" loading="lazy">
+              <div class="overlay"></div>
+              <div class="caption"><b>Resort‑style amenities</b><div class="small">Clubhouse • Pool • Golf • Gated</div></div>
+            </div>
+            <div class="slide">
+              <img src="./DJI_0276.jpg" alt="Atlanta skyline neighborhood" loading="lazy">
+              <div class="overlay"></div>
+              <div class="caption"><b>Coveted Atlanta neighborhoods</b><div class="small">Close to parks, schools, and shopping</div></div>
+            </div>
+            <div class="slide">
+              <img src="./Liberty_Communities_Preview_NOWM.jpg" alt="Modern home exterior" loading="lazy">
+              <div class="overlay"></div>
+              <div class="caption"><b>Modern builds, classic charm</b><div class="small">Bright, open layouts for everyday living</div></div>
+            </div>
+          </div>
+          <button class="ctrl prev" aria-label="Previous" title="Previous">‹</button>
+          <button class="ctrl next" aria-label="Next" title="Next">›</button>
+          <div class="dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="by-the-numbers">
+      <div class="wrap">
+        <h2>By the numbers</h2>
+        <div class="stats">
+          <div class="stat"><b data-count-to="14">0</b><div class="label">Years in Atlanta</div></div>
+          <div class="stat"><b data-count-to="98">0</b><div class="label">Customer satisfaction (%)</div></div>
+          <div class="stat"><b data-count-to="250">0</b><div class="label">Homes toured with 3D</div></div>
+          <div class="stat"><b data-count-to="48">0</b><div class="label">Avg. hours to first showing</div></div>
+        </div>
+      </div>
+    </section>
+
     <section id="listings">
       <div class="wrap">
         <h2>Live Listings — Demo Data</h2>
@@ -304,7 +477,7 @@
         <p class="lead">Follow a community to get notified when new listings appear. This saves a search locally and powers alerts in this demo.</p>
         <div class="grid" style="margin-top:12px;">
           <div class="card" style="grid-column:span 4;">
-            <div class="thumb"><img src="./DJI_0276.jpg" alt="Atlanta overview"></div>
+            <div class="thumb"><img src="./DJI_0276.jpg" alt="Atlanta overview" loading="lazy"></div>
             <div class="content">
               <div><b>Atlanta</b></div>
               <div class="meta">City living • Golf • Gated</div>
@@ -312,7 +485,7 @@
             </div>
           </div>
           <div class="card" style="grid-column:span 4;">
-            <div class="thumb"><img src="./CC__1871-HDR.jpg" alt="Sandy Springs"></div>
+            <div class="thumb"><img src="./CC__1871-HDR.jpg" alt="Sandy Springs" loading="lazy"></div>
             <div class="content">
               <div><b>Sandy Springs</b></div>
               <div class="meta">Parks • Cul‑de‑sacs • Schools</div>
@@ -320,12 +493,20 @@
             </div>
           </div>
           <div class="card" style="grid-column:span 4;">
-            <div class="thumb"><img src="./CC__6615.jpg" alt="Brookhaven"></div>
+            <div class="thumb"><img src="./CC__6615.jpg" alt="Brookhaven" loading="lazy"></div>
             <div class="content">
               <div><b>Brookhaven</b></div>
               <div class="meta">Family‑friendly • Shopping • Dining</div>
               <div class="actions"><button class="chip" data-follow="Brookhaven">Follow Brookhaven</button> <button class="chip" data-browse="Brookhaven">Browse</button></div>
             </div>
+          </div>
+        </div>
+        <div class="map-teaser" style="margin-top:12px;">
+          <img src="./DJI_0276.jpg" alt="Atlanta communities map preview" loading="lazy">
+          <div class="mask"></div>
+          <div class="atop">
+            <div><b style="color:#fff;">Explore on a map</b><div class="small" style="color:#cfd5e6;">See listings by neighborhood and amenities</div></div>
+            <a class="btn" href="#listings">Open map</a>
           </div>
         </div>
       </div>
@@ -347,6 +528,129 @@
           <div class="value">
             <b>Concierge service</b>
             <div class="meta">From pre‑approval to closing, we coordinate every step.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sell" class="sell">
+      <div class="wrap">
+        <h2>Sell with confidence</h2>
+        <div class="two" style="margin-top:10px;">
+          <div class="panel-dark">
+            <h3>Premium marketing included</h3>
+            <ul>
+              <li>Pro photography, video, and Matterport 3D</li>
+              <li>Targeted ads and buyer alerts from saved searches</li>
+              <li>Weekly performance report and feedback</li>
+            </ul>
+            <div class="btns"><a class="btn" href="#contact">Get a free pricing review</a><a class="btn ghost" href="#resources">See market report</a></div>
+          </div>
+          <div class="panel-dark">
+            <div class="slider testimonials" id="testimonialSlider" aria-roledescription="carousel">
+              <div class="slides">
+                <div class="slide">
+                  <div class="testimonial">
+                    <div class="quote">“Our home had a 3D tour and multiple offers in 3 days. Seamless experience.”</div>
+                    <div class="who"><div class="avatar"><img src="./1.png" alt="Alex avatar" loading="lazy"></div><div><b>Alex & Jamie</b><div class="small">Sandy Springs sellers</div></div></div>
+                  </div>
+                </div>
+                <div class="slide">
+                  <div class="testimonial">
+                    <div class="quote">“Loved the instant scheduling and payment estimates on listings.”</div>
+                    <div class="who"><div class="avatar"><img src="./2.png" alt="Priya avatar" loading="lazy"></div><div><b>Priya R.</b><div class="small">First‑time buyer</div></div></div>
+                  </div>
+                </div>
+                <div class="slide">
+                  <div class="testimonial">
+                    <div class="quote">“Saved search alerts helped us jump on the perfect home right away.”</div>
+                    <div class="who"><div class="avatar"><img src="./3.png" alt="Marcus avatar" loading="lazy"></div><div><b>Marcus L.</b><div class="small">Brookhaven buyer</div></div></div>
+                  </div>
+                </div>
+              </div>
+              <button class="ctrl prev" aria-label="Previous" title="Previous">‹</button>
+              <button class="ctrl next" aria-label="Next" title="Next">›</button>
+              <div class="dots" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-dark" style="margin-top:10px;">
+          <h3>Recent results</h3>
+          <div class="slider sales" id="recentSales" aria-roledescription="carousel">
+            <div class="slides">
+              <div class="slide">
+                <img src="./CC__1871-HDR.jpg" alt="Sold home exterior" loading="lazy">
+                <div class="overlay"></div>
+                <div class="caption"><b>Under contract in 3 days</b><div class="small"><span class="metric">+$18k over ask</span> • Westside Atlanta</div></div>
+              </div>
+              <div class="slide">
+                <img src="./DJI_0276.jpg" alt="Neighborhood aerial" loading="lazy">
+                <div class="overlay"></div>
+                <div class="caption"><b>Sold in 5 days</b><div class="small"><span class="metric">20+ showings</span> • Sandy Springs</div></div>
+              </div>
+              <div class="slide">
+                <img src="./Liberty_Communities_Preview_NOWM.jpg" alt="Modern listing sold" loading="lazy">
+                <div class="overlay"></div>
+                <div class="caption"><b>Pre‑market interest</b><div class="small"><span class="metric">12 private tours</span> • Brookhaven</div></div>
+              </div>
+            </div>
+            <button class="ctrl prev" aria-label="Previous" title="Previous">‹</button>
+            <button class="ctrl next" aria-label="Next" title="Next">›</button>
+            <div class="dots" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="panel-dark" style="margin-top:10px;">
+          <h3>Our listing process</h3>
+          <div class="process">
+            <div class="step"><b>1. Prep</b><div class="small">Staging, repairs, and pro media within 72 hours.</div></div>
+            <div class="step"><b>2. Launch</b><div class="small">MLS syndication, coming‑soon buzz, agent network.</div></div>
+            <div class="step"><b>3. Promote</b><div class="small">Targeted ads, saved‑search alerts, open house strategy.</div></div>
+            <div class="step"><b>4. Negotiate</b><div class="small">Offer strategy to maximize price and minimize risk.</div></div>
+          </div>
+        </div>
+
+        <div class="two" style="margin-top:10px;">
+          <div class="panel-dark">
+            <h3>Estimate your net</h3>
+            <div class="net">
+              <div class="row">
+                <div><label>Expected sale price</label><input id="sellPrice" type="number" value="650000"></div>
+                <div><label>Agent fee (%)</label><input id="sellFee" type="number" value="5.5" step="0.1"></div>
+              </div>
+              <div class="row">
+                <div><label>Closing costs (%)</label><input id="sellClosePct" type="number" value="1.5" step="0.1"></div>
+                <div><label>Staging</label><input id="sellStaging" type="number" value="750"></div>
+              </div>
+              <div class="row">
+                <div><label>Media & marketing</label><input id="sellMedia" type="number" value="650"></div>
+                <div><label>Mortgage payoff</label><input id="sellPayoff" type="number" value="0"></div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button class="btn" id="sellerCalc">Calculate</button>
+                <div class="out">Estimated net: <b id="sellerOut">—</b></div>
+              </div>
+              <div class="small">Estimate for planning only; not a binding quote. Fees and costs vary.</div>
+            </div>
+          </div>
+          <div class="panel-dark">
+            <h3>Request your valuation</h3>
+            <div style="display:grid;gap:8px;">
+              <input id="sellerName" placeholder="Your name" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              <input id="sellerEmail" placeholder="you@example.com" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              <input id="sellerAddress" placeholder="Property address" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              <select id="sellerTimeframe" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                <option>Just exploring</option>
+                <option>1–3 months</option>
+                <option>3–6 months</option>
+                <option>Sooner</option>
+              </select>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button class="btn" id="sellerSubmit">Get valuation & plan</button>
+                <div class="small">Same‑day response</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -567,7 +871,18 @@
       <div>© 2025 Cross Creek Realty • Demonstration experience for showcase purposes</div>
     </div>
 
-    <div class="toast" id="toast"></div>
+    <div class="toast" id="toast" aria-live="polite"></div>
+
+    <div class="sticky-cta" id="stickyCta" style="display:none;">
+      <div>
+        <b>Start your search today</b>
+        <div class="small">Save a search, get alerts, tour instantly</div>
+      </div>
+      <div class="btns" style="margin:0;">
+        <a class="btn" href="#saved" id="ctaGetAlerts">Get alerts</a>
+        <a class="btn ghost" href="#contact">Talk to an agent</a>
+      </div>
+    </div>
 
     <button class="fab" id="helpFab" title="Need help?">Need help?</button>
 
@@ -877,7 +1192,7 @@
           el.className = 'card';
           el.innerHTML = `
             <div class="thumb">
-              <img src="${home.thumb}" alt="${home.address}">
+              <img src="${home.thumb}" alt="${home.address}" loading="lazy">
               <button class="fav ${favorites.has(home.id) ? 'active' : ''}" aria-label="Favorite">★</button>
             </div>
             <div class="content">
@@ -1031,7 +1346,7 @@
         comps.forEach(c => {
           const el = document.createElement('div');
           el.className = 'comp';
-          el.innerHTML = `<img src='${c.thumb}' alt='${c.address}'><div class='p'><b>${fmtMoney(c.price)}</b><div>${c.beds} bd • ${c.baths} ba</div><div style='color:#667;'>${c.address}</div></div>`;
+          el.innerHTML = `<img src='${c.thumb}' alt='${c.address}' loading='lazy'><div class='p'><b>${fmtMoney(c.price)}</b><div>${c.beds} bd • ${c.baths} ba</div><div style='color:#667;'>${c.address}</div></div>`;
           grid.appendChild(el);
         });
       }
@@ -1169,7 +1484,7 @@
         const name = document.getElementById('emptyName').value.trim();
         const email = document.getElementById('emptyEmail').value.trim();
         if (!name || !email) { toast('Please add name and email.'); return; }
-        if (!user.email) user.signIn(email);
+        if (!user.email) user.signIn({ name, email });
         saveCurrentSearch();
         toast('Saved. We will notify you when a match appears.');
       });
@@ -1219,6 +1534,98 @@
       // Open deep-linked property if provided
       (() => { const qs = new URLSearchParams(location.search); const id = qs.get('prop'); if (id) openModal(id); })();
 
+      // Simple slider utility (carousel)
+      function makeSlider(rootId, opts = {}) {
+        const root = document.getElementById(rootId);
+        if (!root) return null;
+        const track = root.querySelector('.slides');
+        const slides = Array.from(track.children);
+        const prev = root.querySelector('.prev');
+        const next = root.querySelector('.next');
+        const dotsWrap = root.querySelector('.dots');
+        let index = 0;
+        let timer = null;
+
+        function updateDots() {
+          if (!dotsWrap) return;
+          dotsWrap.innerHTML = '';
+          slides.forEach((_, i) => {
+            const d = document.createElement('div');
+            d.className = 'dot' + (i === index ? ' active' : '');
+            d.addEventListener('click', () => go(i));
+            dotsWrap.appendChild(d);
+          });
+        }
+
+        function go(i) {
+          index = (i + slides.length) % slides.length;
+          track.style.transform = `translateX(${-index * 100}%)`;
+          updateDots();
+        }
+
+        function start() {
+          if (!opts.autoplayMs) return;
+          stop();
+          timer = setInterval(() => go(index + 1), opts.autoplayMs);
+        }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+        prev?.addEventListener('click', () => { go(index - 1); start(); });
+        next?.addEventListener('click', () => { go(index + 1); start(); });
+        root.addEventListener('mouseenter', stop);
+        root.addEventListener('mouseleave', start);
+        updateDots();
+        go(0);
+        start();
+        return { go, start, stop };
+      }
+
+      // Initialize sliders (respect reduced motion)
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      makeSlider('showcaseSlider', { autoplayMs: reduceMotion ? 0 : 5000 });
+      makeSlider('testimonialSlider', { autoplayMs: reduceMotion ? 0 : 6000 });
+
+      // Animated counters when in view
+      function animateCount(el, to, duration = 1200) {
+        const start = 0; const diff = to - start; const t0 = performance.now();
+        function tick(t) {
+          const p = Math.min(1, (t - t0) / duration);
+          el.textContent = Math.round(start + diff * (0.5 - Math.cos(Math.PI * p) / 2));
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      const counters = document.querySelectorAll('[data-count-to]');
+      if (counters.length) {
+        const obs = new IntersectionObserver((entries, ob) => {
+          entries.forEach(e => {
+            if (e.isIntersecting && !e.target.dataset.counted) {
+              e.target.dataset.counted = '1';
+              animateCount(e.target, parseInt(e.target.getAttribute('data-count-to') || '0', 10));
+              ob.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        counters.forEach(c => obs.observe(c));
+      }
+
+      // Sticky CTA logic
+      const sticky = document.getElementById('stickyCta');
+      function engagementReady() {
+        const saved = store.get('cc_saved_searches', []);
+        return Boolean(user.email) || saved.length > 0;
+      }
+      function updateSticky() {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        const nearBottom = window.innerHeight + y > (document.body.scrollHeight - 800);
+        const show = y > 800 && !engagementReady() && !nearBottom;
+        sticky.style.display = show ? 'flex' : 'none';
+      }
+      window.addEventListener('scroll', updateSticky, { passive: true });
+      window.addEventListener('resize', updateSticky);
+      document.getElementById('ctaGetAlerts').addEventListener('click', () => setTimeout(updateSticky, 800));
+      updateSticky();
+
       // JSON-LD (LocalBusiness)
       const schema = {
         '@context': 'https://schema.org',
@@ -1238,6 +1645,44 @@
         }
       };
       const ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.textContent = JSON.stringify(schema); document.head.appendChild(ld);
+
+      // Sellers: recent sales slider
+      makeSlider('recentSales', { autoplayMs: reduceMotion ? 0 : 5000 });
+
+      // Sellers: net sheet estimator
+      function calcNet() {
+        const price = parseFloat(document.getElementById('sellPrice').value || '0');
+        const feePct = parseFloat(document.getElementById('sellFee').value || '0');
+        const closePct = parseFloat(document.getElementById('sellClosePct').value || '0');
+        const staging = parseFloat(document.getElementById('sellStaging').value || '0');
+        const media = parseFloat(document.getElementById('sellMedia').value || '0');
+        const payoff = parseFloat(document.getElementById('sellPayoff').value || '0');
+        const fees = price * (feePct/100) + price * (closePct/100) + staging + media;
+        const net = Math.max(0, price - fees - payoff);
+        document.getElementById('sellerOut').textContent = '$' + Math.round(net).toLocaleString();
+        return { price, feePct, closePct, staging, media, payoff, net };
+      }
+      document.getElementById('sellerCalc')?.addEventListener('click', calcNet);
+
+      // Sellers: lead capture
+      document.getElementById('sellerSubmit')?.addEventListener('click', () => {
+        const name = document.getElementById('sellerName').value.trim();
+        const email = document.getElementById('sellerEmail').value.trim();
+        const address = document.getElementById('sellerAddress').value.trim();
+        const timeframe = document.getElementById('sellerTimeframe').value;
+        if (!name || !email || !address) { toast('Please add name, email, and address.'); return; }
+        const net = calcNet();
+        const lead = {
+          source: 'IDX demo — seller',
+          name, email, address, timeframe,
+          estimatedNet: net.net || null,
+          inputs: net,
+          createdAt: new Date().toISOString()
+        };
+        const arr = store.get('cc_seller_leads', []); arr.push(lead); store.set('cc_seller_leads', arr);
+        toast('Thanks! We will send a valuation shortly.');
+        if (!user.email) { user.signIn({ name, email }); }
+      });
     </script>
   </body>
 </html>

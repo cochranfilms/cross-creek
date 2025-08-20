@@ -201,6 +201,49 @@
         </article>
       </section>
 
+      <section class="card" style="margin-top:16px">
+        <div class="head">Message Board (Demo)</div>
+        <div class="body">
+          <p class="muted" style="margin-top:0">Showcases a simple client ↔ developer message flow. Stores messages locally and can load from a JSON file if present.</p>
+
+          <form id="messageForm" style="display:grid;gap:12px;margin-top:8px">
+            <div style="display:grid;gap:6px">
+              <label for="messageName" style="font-size:12px;font-weight:700;color:var(--slate);letter-spacing:.3px;text-transform:uppercase">Your Name</label>
+              <input id="messageName" type="text" placeholder="Optional" />
+            </div>
+            <div style="display:grid;gap:6px">
+              <label for="messageText" style="font-size:12px;font-weight:700;color:var(--slate);letter-spacing:.3px;text-transform:uppercase">Message</label>
+              <textarea id="messageText" rows="4" placeholder="Type your message…"></textarea>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <small id="charCount" class="muted">0 characters</small>
+              <button type="submit" class="btn primary">Send Message</button>
+            </div>
+          </form>
+
+          <div style="margin-top:16px">
+            <h4 style="margin:0 0 10px 0;font-size:16px;color:var(--ink)">Recent Messages</h4>
+            <div id="messagesList" style="max-height:420px;overflow:auto;border:1px solid var(--border);border-radius:12px;padding:12px">
+              <div style="text-align:center;padding:24px;color:var(--muted)">No messages yet</div>
+            </div>
+
+            <div id="replyFormContainer" style="display:none;margin-top:12px;padding:12px;border:1px solid var(--border);border-radius:12px;background:rgba(199,168,107,.06)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <strong>Reply to: <span id="replyToName"></span></strong>
+                <button class="btn" type="button" id="replyClose">Close</button>
+              </div>
+              <div style="display:grid;gap:8px">
+                <textarea id="replyText" rows="3" placeholder="Type your response…"></textarea>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <small id="replyCharCount" class="muted">0 characters</small>
+                  <button class="btn primary" type="button" id="replySend">Send Response</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <p class="muted" style="text-align:center;margin:20px 0">Tip: Add query params like <code>?progress=45&phase=Phase 2</code> to prefill the demo.</p>
     </main>
 
@@ -268,6 +311,150 @@
         document.getElementById('applyProgress')?.addEventListener('click', ()=> setProgress(input.value));
         document.querySelectorAll('[data-preset]')?.forEach(b=> b.addEventListener('click', ()=> setProgress(b.getAttribute('data-preset'))));
         select?.addEventListener('change', ()=> setPhase(select.value));
+      })();
+
+      // Message board demo (local JSON + localStorage)
+      (function(){
+        const messagesList = document.getElementById('messagesList');
+        const messageForm = document.getElementById('messageForm');
+        const messageText = document.getElementById('messageText');
+        const messageName = document.getElementById('messageName');
+        const charCount = document.getElementById('charCount');
+        const replyWrap = document.getElementById('replyFormContainer');
+        const replyToName = document.getElementById('replyToName');
+        const replyText = document.getElementById('replyText');
+        const replyChar = document.getElementById('replyCharCount');
+        const replyClose = document.getElementById('replyClose');
+        const replySend = document.getElementById('replySend');
+
+        let currentReplyId = null;
+
+        function safeFetch(url, opts={}, timeoutMs=8000){
+          const ctrl = new AbortController();
+          const id = setTimeout(()=>ctrl.abort(), timeoutMs);
+          return fetch(url, { ...opts, signal: ctrl.signal, cache:'no-store' }).finally(()=>clearTimeout(id));
+        }
+
+        function loadMessagesFromLocal(){
+          try { return JSON.parse(localStorage.getItem('ccr-messages')||'[]'); } catch { return []; }
+        }
+        function saveMessagesToLocal(list){
+          localStorage.setItem('ccr-messages', JSON.stringify(list||[]));
+        }
+
+        async function loadMessages(){
+          try{
+            // Optional JSON file if provided alongside the site
+            const res = await safeFetch('./ccr-live-data.json');
+            if (res.ok){
+              const data = await res.json();
+              const msgs = Array.isArray(data.messages) ? data.messages : [];
+              saveMessagesToLocal(msgs);
+              displayMessages(msgs);
+              return;
+            }
+          }catch(err){ /* ignore and fall back */ }
+          displayMessages(loadMessagesFromLocal());
+        }
+
+        function displayMessages(messages){
+          if (!messages?.length){
+            messagesList.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted)">No messages yet</div>';
+            return;
+          }
+          messagesList.innerHTML = messages.map(msg => {
+            const header = `
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#ffdca8);display:grid;place-items:center;color:#111;font-weight:800">${(msg.name||'A').charAt(0).toUpperCase()}</div>
+                  <div><strong>${msg.name||'Anonymous'}</strong><div class="muted" style="font-size:12px">${formatTime(msg.timestamp)}</div></div>
+                </div>
+                <div style="display:flex;gap:6px;align-items:center">
+                  ${msg.read ? '<span class="pill" style="background:#e6f7f0;color:#0b8f64">Read</span>' : ''}
+                </div>
+              </div>`;
+            const body = `<div style="background:rgba(0,0,0,.03);border:1px solid var(--border);border-radius:10px;padding:10px">${escapeHtml(msg.text||'')}</div>`;
+            const response = (msg.responses && msg.responses.length) ? `
+              <div style="margin-top:8px;padding:10px;border-left:3px solid var(--gold);background:rgba(199,168,107,.08);border-radius:8px">
+                <div style="font-size:12px" class="muted">Response from ${msg.responses[msg.responses.length-1].responder||'Team'}</div>
+                <div style="margin-top:4px">${escapeHtml(msg.responses[msg.responses.length-1].text||'')}</div>
+              </div>` : '';
+            const actions = `
+              <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+                ${!msg.read ? `<button class="btn" data-act="read" data-id="${msg.id}">Mark read</button>` : ''}
+                <button class="btn primary" data-act="reply" data-id="${msg.id}" data-name="${encodeURIComponent(msg.name||'Anonymous')}">Reply</button>
+              </div>`;
+            return `<div style="border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:10px">${header}${body}${response}${actions}</div>`;
+          }).join('');
+
+          messagesList.querySelectorAll('[data-act="reply"]').forEach(btn => btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const nm = decodeURIComponent(btn.getAttribute('data-name')||'Anonymous');
+            currentReplyId = id;
+            replyToName.textContent = nm;
+            replyText.value = '';
+            replyChar.textContent = '0 characters';
+            replyWrap.style.display = 'block';
+            replyText.focus();
+          }));
+          messagesList.querySelectorAll('[data-act="read"]').forEach(btn => btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const list = loadMessagesFromLocal();
+            const idx = list.findIndex(m=>String(m.id)===String(id));
+            if (idx>-1){ list[idx].read = true; saveMessagesToLocal(list); displayMessages(list); }
+          }));
+        }
+
+        function escapeHtml(s){
+          return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+        }
+        function formatTime(ts){
+          if (!ts) return 'Just now';
+          try{
+            const d = new Date(ts); const now = new Date(); const diff = (now - d);
+            if (diff < 60000) return 'Just now';
+            if (diff < 3600000) return `${Math.floor(diff/60000)}m ago`;
+            if (diff < 86400000) return `${Math.floor(diff/3600000)}h ago`;
+            return d.toLocaleDateString();
+          }catch{ return 'Just now'; }
+        }
+
+        // Form wiring
+        messageText?.addEventListener('input', () => { charCount.textContent = `${messageText.value.length} characters`; });
+        replyText?.addEventListener('input', () => { replyChar.textContent = `${replyText.value.length} characters`; });
+        replyClose?.addEventListener('click', () => { replyWrap.style.display = 'none'; currentReplyId = null; });
+        replySend?.addEventListener('click', () => {
+          const txt = replyText.value.trim();
+          if (!txt || !currentReplyId) return;
+          const list = loadMessagesFromLocal();
+          const idx = list.findIndex(m=>String(m.id)===String(currentReplyId));
+          if (idx>-1){
+            const resp = { text: txt, responder: 'Cross Creek Team', timestamp: new Date().toISOString() };
+            list[idx].responses = Array.isArray(list[idx].responses) ? list[idx].responses : [];
+            list[idx].responses.push(resp);
+            list[idx].responded = true;
+            saveMessagesToLocal(list);
+            displayMessages(list);
+          }
+          replyWrap.style.display = 'none';
+          currentReplyId = null;
+        });
+
+        messageForm?.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const name = (messageName?.value||'').trim();
+          const text = (messageText?.value||'').trim();
+          if (!text) return;
+          const msg = { id: Date.now(), name, text, timestamp: new Date().toISOString(), read:false, responded:false, priority:'normal', responses:[] };
+          const list = loadMessagesFromLocal();
+          list.unshift(msg);
+          saveMessagesToLocal(list);
+          displayMessages(list);
+          messageText.value=''; charCount.textContent='0 characters';
+        });
+
+        // init
+        loadMessages();
       })();
     </script>
   </body>

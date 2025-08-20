@@ -52,6 +52,9 @@
       .btn { display: inline-block; padding: 12px 18px; border-radius: 10px; border: 1px solid transparent; font-weight: 700; letter-spacing: .3px; }
       .btn.primary { background: var(--gold); color: #111; }
       .btn.ghost { border-color: rgba(255,255,255,.35); color: #fff; }
+      /* Make the floating 3D Tour button black */
+      #openTourDemo { background: #111; color: #fff; border-color: #111; }
+      #openTourDemo:hover { filter: brightness(1.05); }
 
       section { padding: 64px 0; }
       h2 { font-size: 28px; margin: 0 0 16px; color: var(--ink); }
@@ -138,6 +141,77 @@
         .btn { padding: 10px 12px; border-radius: 8px; }
         .brand small { display: none; }
       }
+      /* Demo launchers (floating) */
+      .demo-launchers { position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 50; }
+      .btn.small { font-size: 13px; padding: 9px 12px; border-radius: 999px; }
+
+      /* Generic modal */
+      .modal { position: fixed; inset: 0; background: rgba(0,0,0,.72); display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+      .modal.open { display: flex; }
+      .modal .dialog { position: relative; width: 100%; max-width: 820px; border-radius: 14px; overflow: hidden; border: 1px solid #e6e6ef; background: var(--card); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+      .modal .head { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid #ececf2; background: #fafafa; }
+      .modal .head h3 { margin: 0; font-size: 16px; color: var(--ink); }
+      .modal .close { appearance: none; border: 0; background: rgba(0,0,0,.06); color: #111; border-radius: 999px; padding: 6px 10px; font-weight: 700; cursor: pointer; }
+      .modal .body { padding: 16px; background: #fff; }
+
+      /* Email demo form */
+      .email-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+      .field { display: grid; gap: 6px; margin-bottom: 10px; }
+      .field label { font-weight: 700; font-size: 12px; color: var(--slate); letter-spacing: .3px; text-transform: uppercase; }
+      .field input, .field textarea { width: 100%; padding: 10px 12px; border: 1px solid #e1e3ec; border-radius: 10px; font: inherit; outline: none; }
+      .field textarea { min-height: 120px; resize: vertical; }
+      .email-actions { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+      .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: #f5f6fb; color: #556; font-size: 12px; border: 1px solid #e6e6ef; }
+      .spinner { width: 14px; height: 14px; border: 2px solid #cdd2e6; border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .success { color: #11643c; background: #e9f7ef; border-color: #cdebd9; }
+
+      .auto-reply { position: absolute; right: 12px; bottom: 12px; background: #11162f; color: #e9ecf4; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px; width: min(420px, 90vw); box-shadow: 0 12px 30px rgba(0,0,0,.4); display: none; }
+      .auto-reply.show { display: block; animation: slideUp .32s ease-out; }
+      @keyframes slideUp { from { transform: translateY(8px); opacity: .6; } to { transform: translateY(0); opacity: 1; } }
+      .auto-reply .meta { font-size: 12px; color: #aab1c8; margin-bottom: 6px; }
+      .auto-reply .cta { margin-top: 8px; display: inline-block; background: var(--gold); color: #111; border-radius: 999px; padding: 6px 10px; font-weight: 800; }
+
+      /* Tour modal */
+      .tour-frame { position: relative; background: #0b0e2a; }
+      .tour-frame::before { content: ""; display: block; padding-top: 56.25%; }
+      .tour-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .tour-headline { font-weight: 800; letter-spacing: .3px; color: var(--ink); }
+      .tour-sub { color: var(--muted); font-size: 13px; }
+
+      @media (max-width: 900px) {
+        .email-grid { grid-template-columns: 1fr; }
+      }
+      /* Spotlight guide overlay */
+      .guide-overlay { position: fixed; inset: 0; display: none; z-index: 1000; pointer-events: none; }
+      .guide-overlay.open { display: block; }
+      .guide-spot { position: absolute; border-radius: 12px; box-shadow: 0 0 0 200vmax rgba(0,0,0,.6); outline: 2px solid var(--gold); transition: all .18s ease; }
+      .guide-tip { position: absolute; max-width: 320px; background: #11162f; color: #e9ecf4; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
+      /* Mail preview modal (Gmail‑style mock) */
+      .mail-app { display: grid; grid-template-columns: 280px 1fr; height: min(72vh, 680px); background: #fff; }
+      .mail-list { background: #f6f7fb; border-right: 1px solid #e6e6ef; overflow: auto; }
+      .mail-item { padding: 12px 14px; border-bottom: 1px solid #ececf2; cursor: default; display: grid; grid-template-columns: 1fr auto; gap: 4px; }
+      .mail-item .from { font-weight: 700; color: #1f2742; }
+      .mail-item .time { color: #7b8093; font-size: 12px; }
+      .mail-item .sub { grid-column: 1 / -1; color: #4b5370; font-size: 13px; }
+      .mail-item.select { animation: flash .8s ease-in-out; }
+      @keyframes flash { 0% { background: #fff9e8; } 100% { background: transparent; } }
+      .mail-detail { overflow: auto; background: #fff; }
+      .email-template { border: 1px solid #e6e6ef; border-radius: 12px; overflow: hidden; margin: 14px; }
+      .email-template .et-head { background: var(--ink); color: #e9ecf4; padding: 16px; display: flex; align-items: center; justify-content: space-between; }
+      .email-template .et-head .brand { color: #fff; font-weight: 800; letter-spacing: .3px; }
+      .email-template .et-head .subject { color: #cfd5e6; font-size: 13px; }
+      .email-template .et-body { padding: 18px; }
+      .email-template .et-body h4 { margin: 0 0 8px; color: var(--ink); }
+      .email-template .et-body p { margin: 8px 0; color: #2f3446; }
+      .email-template .meta { margin-top: 10px; font-size: 13px; color: #7b8093; }
+      .email-template .et-actions { margin-top: 14px; display: flex; gap: 10px; }
+      .email-template .et-actions a { text-decoration: none; }
+      .mail-app.view-detail .mail-list { filter: grayscale(.15); }
+      @media (max-width: 900px) {
+        .mail-app { grid-template-columns: 1fr; height: 70vh; }
+        .mail-app.view-detail .mail-list { display: none; }
+      }
     </style>
   </head>
   <body>
@@ -150,6 +224,121 @@
           <a href="./pricing.html">Quote</a>
           <a href="./idx-demo.html">IDX Demo</a>
           <a href="#work">Visuals</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating demo launchers -->
+    <div class="demo-launchers" aria-label="Interactive demos">
+      <button id="openEmailDemo" class="btn primary small" title="Open Email Flow Demo">Email Demo</button>
+      <button id="openTourDemo" class="btn ghost small" title="Open 3D Tour Demo">3D Tour</button>
+    </div>
+
+    <!-- Email demo modal -->
+    <div class="modal" id="emailDemo" aria-hidden="true" role="dialog" aria-labelledby="emailDemoTitle">
+      <div class="dialog">
+        <div class="head">
+          <h3 id="emailDemoTitle">Email Form — Instant Reply Mockup</h3>
+          <button class="close" data-close="#emailDemo">Close</button>
+        </div>
+        <div class="body">
+          <!-- Spotlight overlay for step explanations -->
+          <div id="guide" class="guide-overlay" aria-hidden="true">
+            <div id="guideSpot" class="guide-spot"></div>
+            <div id="guideTip" class="guide-tip" role="note"></div>
+          </div>
+          <div class="email-grid">
+            <div>
+              <div class="field">
+                <label for="edName">Name</label>
+                <input id="edName" type="text" placeholder="Your name">
+              </div>
+              <div class="field">
+                <label for="edEmail">Email</label>
+                <input id="edEmail" type="email" placeholder="you@example.com">
+              </div>
+              <div class="field">
+                <label for="edMsg">Message</label>
+                <textarea id="edMsg" placeholder="How can we help?"></textarea>
+              </div>
+              <div class="email-actions">
+                <button id="edSend" class="btn primary">Send</button>
+                <span id="edStatus" class="badge" aria-live="polite"></span>
+              </div>
+            </div>
+            <div>
+              <div class="panel">
+                <div class="kicker">Professional Setup</div>
+                <h3 style="margin:6px 0 8px;">Branded email, clean payloads</h3>
+                <ul class="clean">
+                  <li>Modern, trustable form UI</li>
+                  <li>Validations and spam‑resistant patterns</li>
+                  <li>Ready to wire to EmailJS/CRM in production</li>
+                </ul>
+                <div class="note" style="margin-top:8px;">This demo auto‑types and simulates send + reply — no real email sent.</div>
+              </div>
+            </div>
+          </div>
+          <div class="auto-reply" id="edReply" aria-live="polite">
+            <div class="meta">Auto‑reply — Cross Creek Realty</div>
+            <div><b>Thanks, Alex!</b> We received your message and will reach out shortly. In the meantime, explore live listings and schedule a tour.</div>
+            <a class="cta" href="./idx-demo.html">Open the IDX demo →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D tour modal -->
+    <div class="modal" id="tourDemo" aria-hidden="true" role="dialog" aria-labelledby="tourDemoTitle">
+      <div class="dialog">
+        <div class="head">
+          <h3 id="tourDemoTitle" class="tour-headline">What if Cross Creek Realty toured this way?</h3>
+          <button class="close" data-close="#tourDemo">Close</button>
+        </div>
+        <div class="body">
+          <div class="tour-sub">Immersive, on‑brand presentation that keeps buyers engaged.</div>
+          <div class="tour-frame" style="margin-top:10px; border-radius: 10px; overflow: hidden; border: 1px solid #e6e6ef;">
+            <iframe src="https://my.matterport.com/show/?m=JFdHyZdKqRh&play=1&brand=0" allow="fullscreen; xr-spatial-tracking" allowfullscreen title="3D Tour — Matterport"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Email client preview modal -->
+    <div class="modal" id="mailPreview" aria-hidden="true" role="dialog" aria-labelledby="mailPreviewTitle">
+      <div class="dialog">
+        <div class="head">
+          <h3 id="mailPreviewTitle">Inbox — EmailJS template preview</h3>
+          <button class="close" data-close="#mailPreview">Close</button>
+        </div>
+        <div class="body">
+          <div id="mailApp" class="mail-app">
+            <div class="mail-list">
+              <div id="mpItem" class="mail-item">
+                <div class="from">Cross Creek Realty</div>
+                <div class="time">Now</div>
+                <div class="sub" id="mpSubjectList">Thanks, <span id="mpNameInline">Alex</span> — next steps</div>
+              </div>
+            </div>
+            <div class="mail-detail">
+              <div class="email-template">
+                <div class="et-head">
+                  <div class="brand">Cross Creek Realty</div>
+                  <div class="subject" id="mpSubject">Thanks, Alex — next steps</div>
+                </div>
+                <div class="et-body">
+                  <h4>Hi <span id="mpName">Alex</span>,</h4>
+                  <p>We received your message and pulled a few quick options based on your note.</p>
+                  <p id="mpMsg">"Hi Cross Creek — I'm interested in homes near Buckhead around $750k. Can we schedule a tour this weekend?"</p>
+                  <p class="meta">From: <span id="mpEmail">alex@example.com</span> • To: c21intown(at)gmail(dotted)com</p>
+                  <div class="et-actions">
+                    <a class="btn primary" href="./idx-demo.html">See homes near you</a>
+                    <a class="btn ghost" href="./idx-demo.html#schedule">Schedule a tour</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -490,6 +679,139 @@
             lb.setAttribute('aria-hidden','false');
           }
         }, true);
+        // Modal helpers
+        const openModal = (el) => { el.classList.add('open'); el.setAttribute('aria-hidden','false'); };
+        const closeModal = (el) => { el.classList.remove('open'); el.setAttribute('aria-hidden','true'); };
+        document.querySelectorAll('.modal').forEach((m) => {
+          m.addEventListener('click', (e) => { if (e.target === m) closeModal(m); });
+        });
+        document.querySelectorAll('.modal .close').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const sel = btn.getAttribute('data-close');
+            const target = sel ? document.querySelector(sel) : btn.closest('.modal');
+            if (target) closeModal(target);
+          });
+        });
+
+        // Launchers
+        const emailModal = document.getElementById('emailDemo');
+        const tourModal = document.getElementById('tourDemo');
+        const openEmailBtn = document.getElementById('openEmailDemo');
+        const openTourBtn = document.getElementById('openTourDemo');
+        if (openEmailBtn) openEmailBtn.addEventListener('click', () => startEmailDemo());
+        if (openTourBtn) openTourBtn.addEventListener('click', () => openModal(tourModal));
+
+        // Email demo logic
+        function typeText(element, text, speed, done) {
+          element.focus();
+          element.value = '';
+          let i = 0;
+          const tick = () => {
+            element.value += text.charAt(i++);
+            if (i < text.length) setTimeout(tick, speed);
+            else if (done) done();
+          };
+          setTimeout(tick, speed);
+        }
+
+        function startEmailDemo() {
+          const nameEl = document.getElementById('edName');
+          const emailEl = document.getElementById('edEmail');
+          const msgEl = document.getElementById('edMsg');
+          const sendBtn = document.getElementById('edSend');
+          const status = document.getElementById('edStatus');
+          const reply = document.getElementById('edReply');
+          const guide = document.getElementById('guide');
+          const spot = document.getElementById('guideSpot');
+          const tip = document.getElementById('guideTip');
+
+          // reset
+          [nameEl, emailEl, msgEl].forEach(i => i.value = '');
+          status.textContent = '';
+          status.className = 'badge';
+          reply.classList.remove('show');
+
+          openModal(emailModal);
+
+          const nameText = 'Alex Buyer';
+          const emailText = 'alex@example.com';
+          const msgText = 'Hi Cross Creek — I\'m interested in homes near Buckhead around $750k. Can we schedule a tour this weekend?';
+
+          typeText(nameEl, nameText, 110, () => {
+            spotlight(nameEl, 'Step 1: The form captures clean, structured contact data.');
+            typeText(emailEl, emailText, 95, () => {
+              spotlight(emailEl, 'Step 2: Email is validated and ready for EmailJS payload.');
+              typeText(msgEl, msgText, 45, () => {
+                // simulate send
+                sendBtn.disabled = true;
+                status.innerHTML = '<span class="spinner" aria-hidden="true"></span> Sending…';
+                spotlight(sendBtn, 'Step 3: One‑click send posts a secure payload to EmailJS/CRM.');
+                setTimeout(() => {
+                  status.textContent = 'Sent!';
+                  status.className = 'badge success';
+                  reply.classList.add('show');
+                  spotlight(reply, 'Step 4: Instant on‑brand auto‑reply confirms receipt.');
+                  setTimeout(() => openMailPreview(nameText, emailText, msgText), 3200);
+                }, 2400);
+              });
+            });
+          });
+        }
+        function spotlight(targetEl, message) {
+          const guide = document.getElementById('guide');
+          const spot = document.getElementById('guideSpot');
+          const tip = document.getElementById('guideTip');
+          if (!targetEl || !guide || !spot || !tip) return;
+          const rect = targetEl.getBoundingClientRect();
+          guide.classList.add('open');
+          guide.setAttribute('aria-hidden','false');
+          spot.style.left = `${rect.left - 8 + window.scrollX}px`;
+          spot.style.top = `${rect.top - 8 + window.scrollY}px`;
+          spot.style.width = `${rect.width + 16}px`;
+          spot.style.height = `${rect.height + 16}px`;
+          tip.textContent = message;
+          tip.style.left = `${rect.left + window.scrollX}px`;
+          tip.style.top = `${rect.bottom + 10 + window.scrollY}px`;
+          // auto hide after 3s
+          clearTimeout(window.__guideTimer);
+          window.__guideTimer = setTimeout(() => {
+            guide.classList.remove('open');
+            guide.setAttribute('aria-hidden','true');
+          }, 3000);
+        }
+        function openMailPreview(name, email, message) {
+          const modal = document.getElementById('mailPreview');
+          const app = document.getElementById('mailApp');
+          const item = document.getElementById('mpItem');
+          const subjectList = document.getElementById('mpSubjectList');
+          const subject = document.getElementById('mpSubject');
+          const nameInline = document.getElementById('mpNameInline');
+          const nameSpan = document.getElementById('mpName');
+          const emailEl = document.getElementById('mpEmail');
+          const msgEl = document.getElementById('mpMsg');
+
+          const subjText = `Thanks, ${name} — next steps`;
+          if (nameInline) nameInline.textContent = name;
+          if (nameSpan) nameSpan.textContent = name;
+          if (emailEl) emailEl.textContent = email;
+          if (msgEl) msgEl.textContent = message;
+          if (subject) subject.textContent = subjText;
+          if (subjectList) subjectList.innerHTML = `Thanks, <span id="mpNameInline">${name}</span> — next steps`;
+
+          app.classList.remove('view-detail');
+          openModal(modal);
+          item.classList.add('select');
+          setTimeout(() => {
+            app.classList.add('view-detail');
+            // spotlight the inbox row then the subject inside the email
+            const listRow = document.getElementById('mpItem');
+            spotlight(listRow, 'Step 5: New message hits the inbox instantly.');
+            setTimeout(() => {
+              const subj = document.getElementById('mpSubject');
+              spotlight(subj, 'Step 6: Branded EmailJS template with personalized subject.');
+            }, 2000);
+          }, 1600);
+        }
       })();
     </script>
   </body>

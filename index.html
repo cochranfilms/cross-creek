@@ -186,7 +186,7 @@
       .guide-overlay { position: fixed; inset: 0; display: none; z-index: 1000; pointer-events: none; }
       .guide-overlay.open { display: block; }
       .guide-spot { position: absolute; border-radius: 12px; box-shadow: 0 0 0 200vmax rgba(0,0,0,.6); outline: 2px solid var(--gold); transition: all .18s ease; }
-      .guide-tip { position: absolute; max-width: 320px; background: #11162f; color: #e9ecf4; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
+      .guide-tip { position: absolute; max-width: min(320px, 92vw); background: #11162f; color: #e9ecf4; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
       /* Mail preview modal (Gmail‑style mock) */
       .mail-app { display: grid; grid-template-columns: 280px 1fr; height: min(72vh, 680px); background: #fff; }
       .mail-list { background: #f6f7fb; border-right: 1px solid #e6e6ef; overflow: auto; }
@@ -421,6 +421,53 @@
       </div>
     </section>
 
+    <section id="work">
+      <div class="wrap">
+        <h2>Findings & Visuals</h2>
+        <p class="lead">A few screenshots from the current site and setup. These show what we’ll fix and how the new site will feel.</p>
+        <div class="gallery" style="margin-top:12px;">
+          <figure>
+            <img alt="Visual 1" src="./1.png">
+            <figcaption>Language menu uses icons with no labels, so it’s hard to tell what’s selected.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 2" src="./2.png">
+            <figcaption>Headline claims “3 MILLION VISITS PER MONTH” without a source — feels questionable and hurts trust.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 3" src="./3.png">
+            <figcaption>Two contact forms stack on top of each other with no clear next step. It creates a “wait and see” experience.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 4" src="./4.png">
+            <figcaption>Generic error messages stop people in their tracks and don’t offer another way to move forward.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 5" src="./5.png">
+            <figcaption>One generic form tries to serve buyers, sellers, and agents. Each audience needs its own short path.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 6" src="./6.png">
+            <figcaption>Hero video shows stock beach condos — not Atlanta. We’ll swap in original Cross Creek footage.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 7" src="./7.png">
+            <figcaption>Community pages are light on local info and actions. We’ll add useful data and simple ways to follow new listings.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 8" src="./8.png">
+            <figcaption>The footer includes the web vendor’s logo and link. If the site was paid in full, this should be removed so it’s 100% Cross Creek.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 9" src="./9.png">
+            <figcaption>There appears to be another site at crosscreekatl.com using the older brand; we’ll consolidate and align both so the experience feels consistent.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    
+
     <section id="readme">
       <div class="wrap">
         <h2>README — IDX Demo & MLS Integration</h2>
@@ -480,50 +527,7 @@
       </div>
     </section>
 
-    <section id="work">
-      <div class="wrap">
-        <h2>Findings & Visuals</h2>
-        <p class="lead">A few screenshots from the current site and setup. These show what we’ll fix and how the new site will feel.</p>
-        <div class="gallery" style="margin-top:12px;">
-          <figure>
-            <img alt="Visual 1" src="./1.png">
-            <figcaption>Language menu uses icons with no labels, so it’s hard to tell what’s selected.</figcaption>
-          </figure>
-          <figure>
-            <img alt="Visual 2" src="./2.png">
-            <figcaption>Headline claims “3 MILLION VISITS PER MONTH” without a source — feels questionable and hurts trust.</figcaption>
-          </figure>
-          <figure>
-            <img alt="Visual 3" src="./3.png">
-            <figcaption>Two contact forms stack on top of each other with no clear next step. It creates a “wait and see” experience.</figcaption>
-          </figure>
-          <figure>
-            <img alt="Visual 4" src="./4.png">
-            <figcaption>Generic error messages stop people in their tracks and don’t offer another way to move forward.</figcaption>
-          </figure>
-          <figure>
-            <img alt="Visual 5" src="./5.png">
-            <figcaption>One generic form tries to serve buyers, sellers, and agents. Each audience needs its own short path.</figcaption>
-          </figure>
-          <figure>
-            <img alt="Visual 6" src="./6.png">
-            <figcaption>Hero video shows stock beach condos — not Atlanta. We’ll swap in original Cross Creek footage.</figcaption>
-          </figure>
-          <figure>
-            <img alt="Visual 7" src="./7.png">
-            <figcaption>Community pages are light on local info and actions. We’ll add useful data and simple ways to follow new listings.</figcaption>
-          </figure>
-          <figure>
-            <img alt="Visual 8" src="./8.png">
-            <figcaption>The footer includes the web vendor’s logo and link. If the site was paid in full, this should be removed so it’s 100% Cross Creek.</figcaption>
-          </figure>
-          <figure>
-            <img alt="Visual 9" src="./9.png">
-            <figcaption>There appears to be another site at crosscreekatl.com using the older brand; we’ll consolidate and align both so the experience feels consistent.</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="benchmark">
       <div class="wrap">
@@ -763,15 +767,36 @@
           const tip = document.getElementById('guideTip');
           if (!targetEl || !guide || !spot || !tip) return;
           const rect = targetEl.getBoundingClientRect();
+          const padding = 8;
+          // Positions for a fixed overlay should use viewport coordinates (no scroll offsets)
+          const vw = document.documentElement.clientWidth;
+          const vh = document.documentElement.clientHeight;
+          const left = Math.max(8, rect.left - padding);
+          const top = Math.max(8, rect.top - padding);
+          const width = Math.min(rect.width + padding * 2, vw - 16);
+          const height = Math.min(rect.height + padding * 2, vh - 16);
           guide.classList.add('open');
           guide.setAttribute('aria-hidden','false');
-          spot.style.left = `${rect.left - 8 + window.scrollX}px`;
-          spot.style.top = `${rect.top - 8 + window.scrollY}px`;
-          spot.style.width = `${rect.width + 16}px`;
-          spot.style.height = `${rect.height + 16}px`;
+          spot.style.left = `${left}px`;
+          spot.style.top = `${top}px`;
+          spot.style.width = `${width}px`;
+          spot.style.height = `${height}px`;
           tip.textContent = message;
-          tip.style.left = `${rect.left + window.scrollX}px`;
-          tip.style.top = `${rect.bottom + 10 + window.scrollY}px`;
+          // Position tooltip below if space; otherwise above; clamp to viewport
+          const tipWidth = Math.min(320, vw * 0.92);
+          let tipLeft = left;
+          let tipTop = top + height + 10;
+          if (tipTop + 60 > vh - 8) {
+            tipTop = Math.max(8, top - 10 - 60);
+          }
+          if (tipLeft + tipWidth > vw - 8) {
+            tipLeft = vw - 8 - tipWidth;
+          }
+          tip.style.left = `${tipLeft}px`;
+          tip.style.top = `${tipTop}px`;
+          // Ensure the highlighted element is in view on small screens
+          const targetCenter = rect.top + window.scrollY - window.innerHeight / 2 + rect.height / 2;
+          window.scrollTo({ top: Math.max(0, targetCenter), behavior: 'smooth' });
           // auto hide after 3s
           clearTimeout(window.__guideTimer);
           window.__guideTimer = setTimeout(() => {

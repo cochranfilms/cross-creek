@@ -36,6 +36,12 @@
       .tier h3{margin:0}
       .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:#f1efe9; color:#5a4a22; font-weight:700; font-size:12px; letter-spacing:.3px}
       .price{font-weight:800; font-size:28px; color:var(--ink); margin:8px 0 2px}
+      /* Price reveal interaction */
+      .price{position:relative; transition:filter .35s ease, transform .35s ease, opacity .35s ease}
+      .price.is-hidden{filter:blur(10px); cursor:pointer; opacity:.9}
+      .price.is-hidden::after{content:'Click to reveal'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:rgba(11,14,42,.9); color:#fff; padding:4px 10px; border-radius:999px; font-size:12px; letter-spacing:.3px}
+      .price.reveal-anim{animation:reveal .4s ease-out}
+      @keyframes reveal{from{transform:scale(.98); opacity:.9} to{transform:scale(1); opacity:1}}
       .note{color:var(--muted); font-size:13px}
       .tier ul{margin:12px 0; padding-left:18px}
       .tier .cta{margin-top:auto}
@@ -178,6 +184,26 @@
     <div class="wrap foot">
       <div>© 2025 Cochran Films — Confidential. For Cross Creek Realty review.</div>
     </div>
+    <script>
+      // Blur-to-reveal for package prices
+      (function(){
+        const prices = document.querySelectorAll('.price');
+        prices.forEach((el) => {
+          el.classList.add('is-hidden');
+          el.setAttribute('role','button');
+          el.setAttribute('aria-label','Reveal price');
+          el.tabIndex = 0;
+          const reveal = () => {
+            if (!el.classList.contains('is-hidden')) return;
+            el.classList.remove('is-hidden');
+            el.classList.add('reveal-anim');
+            setTimeout(()=> el.classList.remove('reveal-anim'), 450);
+          };
+          el.addEventListener('click', reveal);
+          el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reveal(); } });
+        });
+      })();
+    </script>
   </body>
 </html>
 

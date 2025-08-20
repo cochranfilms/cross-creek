@@ -74,6 +74,17 @@
       .gallery figure { grid-column: span 4; margin: 0; }
       .gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid #e6e6ef; }
       .gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+      /* Center the fourth image and show full image without crop */
+      .gallery .centerpiece { grid-column: 5 / span 4; }
+      .gallery .centerpiece img { height: auto; object-fit: contain; }
+
+      .video-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+      .video { grid-column: span 6; position: relative; border-radius: 12px; overflow: hidden; background: #0b0e2a; border: 1px solid #e6e6ef; }
+      .video::before { content: ""; display: block; padding-top: 56.25%; }
+      .video .embed { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #e9ecf4; font-weight: 700; letter-spacing: .3px; background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.28)); }
+      .video .embed span { background: var(--gold); color: #111; padding: 8px 12px; border-radius: 999px; }
+      .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
 
       .dark { background: var(--ink); color: #e9ecf4; }
       .dark h2 { color: #fff; }
@@ -84,6 +95,7 @@
       @media (max-width: 960px) {
         .hero-inner { grid-template-columns: 1fr; padding: 56px 0 42px; }
         .cards .card, .pricing .tier, .gallery figure { grid-column: span 12; height: auto; }
+        .video-grid .video { grid-column: span 12; }
       }
     </style>
   </head>
@@ -94,8 +106,7 @@
         <div>
           <a href="#summary">Summary</a>
           <a href="#scope">Scope</a>
-          <a href="#pricing">Investment</a>
-          <a href="#ongoing">Ongoing</a>
+          <a href="./pricing.html">Quote</a>
           <a href="#work">Visuals</a>
         </div>
       </div>
@@ -105,20 +116,20 @@
       <div class="wrap hero-inner">
         <div>
           <div class="kicker">Cross Creek Realty — Digital Upgrade</div>
-          <h1>Website Reboot + Listing Media that Converts</h1>
-          <p class="sub">A corporate‑grade refresh that fixes IDX reliability, clarifies buyer/seller/agent journeys, and elevates brand presentation with on‑site video and photography. Built to launch fast and scale into an always‑on content engine.</p>
+          <h1>Website refresh + listing media that works</h1>
+          <p class="sub">A clean, modern site that works every time. We’ll fix the listing tools, make clear paths for buyers, sellers, and agents, and back it with strong photo + video. Built to launch quickly and grow with you.</p>
           <div class="btns">
-            <a class="btn primary" href="#pricing">See Investment Options</a>
+            <a class="btn primary" href="./pricing.html">Quote</a>
             <a class="btn ghost" href="#scope">What You Get</a>
           </div>
         </div>
         <div class="hero-card">
           <div class="kicker">Highlights</div>
           <ul class="clean">
-            <li><b>IDX (Internet Data Exchange) / MLS (Multiple Listing Service) stability</b> with graceful fallbacks and lead capture when feeds fail</li>
-            <li><b>Two‑path conversion</b> for Buyers and Sellers with clear CTAs (Calls To Action)</li>
-            <li><b>Local authority</b> via market pages, schema, and SEO foundations</li>
-            <li><b>On‑brand media</b> to showcase properties, team, and events</li>
+            <li><b>Reliable listings</b> that keep working, even when the feed acts up</li>
+            <li><b>Clear next steps</b> for buyers and sellers so more people take action</li>
+            <li><b>Stronger local presence</b> with focused market pages and basic SEO</li>
+            <li><b>Original photo + video</b> that looks and feels like Cross Creek</li>
           </ul>
         </div>
       </div>
@@ -127,12 +138,12 @@
     <section id="summary">
       <div class="wrap">
         <h2>Executive Summary</h2>
-        <p class="lead">Your current site provides the essentials but is held back by unreliable IDX modules, placeholder KPIs, and fragmented conversion paths. Our plan focuses on credibility, conversion, and content. We’ll stabilize the listing experience, replace placeholders with verifiable metrics, and give buyers and sellers clear next steps — then support it with premium video/photography to drive trust.</p>
+        <p class="lead">The site covers the basics but a few things hold it back: unreliable listing tools, placeholder numbers, and unclear next steps. We’ll make it trustworthy and easy to use — stabilize listings, swap placeholders for real results, and guide buyers and sellers to act. Then we’ll support it with sharp photo and video.</p>
 
         <div class="cards" style="margin-top:14px;">
           <div class="card">
             <span class="pill">Reliability</span>
-            <h3>Fix IDX + Account Tools</h3>
+            <h3>Fix IDX (Internet Data Exchange) + Account Tools</h3>
             <ul class="clean">
               <li>Resolve "Listings not found" states with a graceful fallback form</li>
               <li>Repair organizer/login; enable saved searches and alerts</li>
@@ -161,17 +172,19 @@
       </div>
     </section>
 
+    
+
     <section id="scope" class="dark">
       <div class="wrap">
         <h2>Scope — Web Reboot (Now)</h2>
         <div class="panel">
           <ul class="clean">
-            <li><b>Design & Build:</b> High‑end, mobile‑first site with clear Buyer, Seller, and Agent paths; performance and accessibility improvements.</li>
-            <li><b>IDX (Internet Data Exchange) / MLS (Multiple Listing Service):</b> Health check and stabilization; visible empty‑state with inquiry capture when feeds are unavailable.</li>
-            <li><b>Conversion:</b> Property cards with Ask/Save/Schedule; 60‑second buyer quiz replaces long intake forms.</li>
-            <li><b>Content:</b> Enhanced community pages; homepage storytelling with real metrics and recent sales.</li>
-            <li><b>SEO (Search Engine Optimization) & Analytics:</b> Technical SEO (Search Engine Optimization), schema, GA4 (Google Analytics 4) events, Google Search Console, and performance tuning.</li>
-            <li><b>Launch:</b> Domain, SSL (Secure Sockets Layer), and uptime monitoring; 30‑day post‑launch support.</li>
+            <li><b>Design & Build:</b> Fast, mobile‑first site with clear paths for Buyers, Sellers, and Agents — plus speed and accessibility improvements.</li>
+            <li><b>Listings:</b> Check and stabilize the IDX (Internet Data Exchange)/MLS tools; show a simple contact form when data is missing.</li>
+            <li><b>Conversion:</b> Property cards with Ask/Save/Schedule; a quick buyer quiz instead of long forms.</li>
+            <li><b>Content:</b> Better community pages; homepage with real numbers and recent wins.</li>
+            <li><b>SEO & Tracking:</b> Basic SEO setup, analytics tracking, and speed tuning.</li>
+            <li><b>Launch:</b> Domain and security set‑up, uptime watch, and 30‑day support after go‑live.</li>
           </ul>
         </div>
       </div>
@@ -180,35 +193,43 @@
     <section id="work">
       <div class="wrap">
         <h2>Findings & Visuals</h2>
-        <p class="lead">Select screenshots from the current experience and domain setup. During build we replace placeholders with verifiable metrics and create reliable flows.</p>
+        <p class="lead">A few screenshots from the current site and setup. These show what we’ll fix and how the new site will feel.</p>
         <div class="gallery" style="margin-top:12px;">
           <figure>
             <img alt="Visual 1" src="./1.png">
-            <figcaption>Language selector displays unlabeled icons; users cannot determine the selected language, reducing accessibility and clarity.</figcaption>
+            <figcaption>Language menu uses icons with no labels, so it’s hard to tell what’s selected.</figcaption>
           </figure>
           <figure>
             <img alt="Visual 2" src="./2.png">
-            <figcaption>Headline KPI (Key Performance Indicator) claims “3 MILLION VISITS PER MONTH” without a cited source; this appears non‑credible and risks trust.</figcaption>
+            <figcaption>Headline claims “3 MILLION VISITS PER MONTH” without a source — feels questionable and hurts trust.</figcaption>
           </figure>
           <figure>
             <img alt="Visual 3" src="./3.png">
-            <figcaption>Duplicate mini‑contact form above the primary form provides no defined next step; creates a “wait to hear back” experience instead of scheduling or confirmation.</figcaption>
+            <figcaption>Two contact forms stack on top of each other with no clear next step. It creates a “wait and see” experience.</figcaption>
           </figure>
           <figure>
             <img alt="Visual 4" src="./4.png">
-            <figcaption>Frequent generic error state (“Sorry we are experiencing system issues. Please try again.”) blocks conversion without guidance or an alternate path.</figcaption>
+            <figcaption>Generic error messages stop people in their tracks and don’t offer another way to move forward.</figcaption>
           </figure>
           <figure>
             <img alt="Visual 5" src="./5.png">
-            <figcaption>Single, generic form for buyers, sellers, and agents lacks tailored workflows; lowers lead qualification and follow‑through.</figcaption>
+            <figcaption>One generic form tries to serve buyers, sellers, and agents. Each audience needs its own short path.</figcaption>
           </figure>
           <figure>
             <img alt="Visual 6" src="./6.png">
-            <figcaption>Hero/banner uses stock footage unrelated to Atlanta inventory (e.g., beach condo); undermines brand authenticity. Replace with original Cross Creek footage from production days.</figcaption>
+            <figcaption>Hero video shows stock beach condos — not Atlanta. We’ll swap in original Cross Creek footage.</figcaption>
           </figure>
           <figure>
             <img alt="Visual 7" src="./7.png">
-            <figcaption>Community pages are thin: limited local data, missing CTAs (Calls To Action), and no automation (saved searches, open‑house alerts) to generate leads.</figcaption>
+            <figcaption>Community pages are light on local info and actions. We’ll add useful data and simple ways to follow new listings.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 8" src="./8.png">
+            <figcaption>The footer includes the web vendor’s logo and link. If the site was paid in full, this should be removed so it’s 100% Cross Creek.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 9" src="./9.png">
+            <figcaption>There appears to be another site at crosscreekatl.com using the older brand; we’ll consolidate and align both so the experience feels consistent.</figcaption>
           </figure>
         </div>
       </div>
@@ -216,155 +237,89 @@
 
     <section id="lighthouse">
       <div class="wrap">
-        <h2>Lighthouse Health Check</h2>
-        <p class="lead">Automated audit of <a href="https://www.crosscreekrealtyatlanta.com/" target="_blank" rel="noopener">crosscreekrealtyatlanta.com</a> highlights where we gain the most impact in week one.</p>
+        <h2>Site Health Check</h2>
+        <p class="lead">Quick check of <a href="https://www.crosscreekrealtyatlanta.com/" target="_blank" rel="noopener">crosscreekrealtyatlanta.com</a> showing where we’ll get easy wins in week one.</p>
         <div class="cards" style="margin-top:14px;">
           <div class="card">
             <span class="pill">Scores</span>
-            <h3>Current Benchmarks</h3>
+            <h3>Current snapshot</h3>
             <ul class="clean">
               <li><b>Performance</b>: 78/100</li>
               <li><b>Accessibility</b>: 94/100</li>
               <li><b>Best Practices</b>: 70/100</li>
-              <li><b>SEO (Search Engine Optimization)</b>: 100/100</li>
+              <li><b>SEO</b>: 100/100</li>
             </ul>
           </div>
           <div class="card">
             <span class="pill">Quick Wins</span>
-            <h3>Top Improvements</h3>
+            <h3>Top improvements</h3>
             <ul class="clean">
-              <li>Eliminate <b>render‑blocking resources</b> (Estimated savings: ~700 ms)</li>
-              <li><b>Efficiently encode images</b> (Estimated savings: ~534 KiB); ensure responsive sizing</li>
-              <li>Reduce <b>unused JavaScript</b> (~194 KiB) and defer non‑critical scripts</li>
-              <li>Lower <b>Largest Contentful Paint</b> (~3.15 s) by optimizing hero media and critical CSS</li>
-              <li>Audit <b>DOM size</b> (≈1,059 elements) to streamline layout and scripting</li>
+              <li>Speed up load by trimming and delaying non‑essential files</li>
+              <li>Compress and properly size images</li>
+              <li>Cut unused scripts and delay anything not needed on first load</li>
+              <li>Improve the first big visual load by optimizing the hero and key styles</li>
+              <li>Slim down extra page elements that slow the browser</li>
             </ul>
           </div>
           <div class="card">
-            <span class="pill">What We’ll Do</span>
-            <h3>Remediation Plan</h3>
+            <span class="pill">What we’ll do</span>
+            <h3>Plan</h3>
             <ul class="clean">
-              <li>Implement server‑side compression and long‑term caching</li>
-              <li>Convert heavy images to modern formats (AVIF/WebP) and lazy‑load below the fold</li>
-              <li>Code‑split and defer non‑essential JS; inline critical CSS</li>
-              <li>Replace stock hero with optimized, original media; preconnect to critical domains</li>
-              <li>Monitor LCP/FID/CLS via GA4 (Google Analytics 4) and Search Console</li>
+              <li>Turn on compression and smart caching on the server</li>
+              <li>Use modern image formats and lazy‑load images below the fold</li>
+              <li>Split code and delay non‑essential scripts; inline the most important styles</li>
+              <li>Swap stock hero for original media and pre‑connect to key services</li>
+              <li>Track speed and stability with analytics and Search Console</li>
             </ul>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="pricing">
-      <div class="wrap">
-        <h2>Investment Options</h2>
-        <p class="lead">Three ways to move now. Each option includes the website reboot and a media package sized to your near‑term priorities. Flat, project‑based pricing — no hourly billing.</p>
-
-        <div class="pricing" style="margin-top:18px;">
-          <div class="tier">
-            <span class="pill">Option A — Essential Launch</span>
-            <h3>Business‑grade reboot + starter media</h3>
-            <div class="price">$3,000 all‑in</div>
-            <div class="note">Best for: fast launch and initial listings</div>
-            <ul>
-              <li>Website: Business Pro (3–5 pages, mobile optimized, SEO (Search Engine Optimization) foundations)</li>
-              <li>Video: 2 hours on‑site + 60‑sec recap</li>
-              <li>Photo: Prime Exposure (2 hours, full editing, online gallery)</li>
-              <li>IDX health check and graceful empty‑state capture</li>
-              <li>GA4 (Google Analytics 4) + Search Console integration</li>
-            </ul>
-            <a class="btn primary cta" href="#next">Select Option A</a>
-          </div>
-
-          <div class="tier" style="border-width:2px; border-color: var(--gold); box-shadow: 0 8px 28px rgba(11,14,42,.08);">
-            <span class="pill">Option B — Growth</span>
-            <h3>Brand expansion + property storytelling</h3>
-            <div class="price">$4,000 all‑in</div>
-            <div class="note">Best for: relaunch + multi‑property content</div>
-            <ul>
-              <li>Website: Brand Builder (6–10 pages, branding, blog optional)</li>
-              <li>Video: 3 hours on‑site + 60‑sec recap</li>
-              <li>Photo: Legacy Capture (3 hours, advanced editing + highlights)</li>
-              <li>1 premium community/market page with stats and schema</li>
-              <li>30‑day support and optimization sprint</li>
-            </ul>
-            <a class="btn primary cta" href="#next">Select Option B</a>
-          </div>
-
-          <div class="tier">
-            <span class="pill">Option C — Complete Relaunch</span>
-            <h3>Full brand site + full‑day production</h3>
-            <div class="price">$5,000 all‑in</div>
-            <div class="note">Best for: comprehensive relaunch and recruiting</div>
-            <ul>
-              <li>Website: Brand Builder with CRM/Newsletter and agent directory</li>
-              <li>Video: 8‑hour production day + 60‑sec recap</li>
-              <li>Photo: Legacy Capture (3 hours) + team headshots</li>
-              <li>2 premium community/market pages + SEO (Search Engine Optimization) schema suite</li>
-              <li>Launch reporting and training</li>
-            </ul>
-            <a class="btn primary cta" href="#next">Select Option C</a>
-          </div>
-        </div>
-
-        <p class="note" style="margin-top:10px;">A‑la‑carte reference rates (for clarity, already reflected in the package values): Website Starter $750, Business Pro $1,250, Brand Builder $2,500. Video: 2h $750, 3h $750, 5h $1,250, 8h + recap $2,200. Photo: Prime $600, Legacy $900. IDX (Internet Data Exchange) provider and MLS (Multiple Listing Service) fees (if applicable) are billed at cost.</p>
-      </div>
-    </section>
-
-    <section id="ongoing" class="dark">
-      <div class="wrap">
-        <h2>Ongoing Content Program (Optional)</h2>
-        <div class="panel">
-          <p class="lead" style="color:#cfd5e6;">If you’d like consistent event coverage and listing content, choose a monthly track. Each includes planning, on‑site production, editing, and delivery to your brand library.</p>
-          <div class="cards" style="margin-top:10px;">
-            <div class="card" style="background:#0f1535;border-color:rgba(255,255,255,.08);color:#e9ecf4;">
-              <h3>Lite — $1,500/mo</h3>
-              <ul class="clean">
-                <li>1 half‑day shoot (video + photo) per month</li>
-                <li>1 x 60‑sec recap + 8–12 edited photos</li>
-                <li>Content calendar + drive delivery</li>
-              </ul>
-            </div>
-            <div class="card" style="background:#0f1535;border-color:rgba(255,255,255,.08);color:#e9ecf4;">
-              <h3>Standard — $3,000/mo</h3>
-              <ul class="clean">
-                <li>2 half‑days or 1 full‑day production</li>
-                <li>2 x 60‑sec edits + 20–30 photos</li>
-                <li>Community page updates and blog briefs</li>
-              </ul>
-            </div>
-            <div class="card" style="background:#0f1535;border-color:rgba(255,255,255,.08);color:#e9ecf4;">
-              <h3>Pro — $5,000/mo</h3>
-              <ul class="clean">
-                <li>2 full‑days or 4 half‑days across teams/properties</li>
-                <li>4 x 60–90 sec edits + photo sets per property</li>
-                <li>Quarterly market video + agent recruiting assets</li>
-              </ul>
-            </div>
-          </div>
-          <p class="note" style="margin-top:10px;">All monthly plans are cancel‑anytime after 3 months. Unused production rolls over within the quarter.</p>
         </div>
       </div>
     </section>
 
     
 
-    <section id="next" class="dark">
+    
+
+    
+
+    <section id="portfolio">
       <div class="wrap">
-        <h2>Next Steps</h2>
-        <div class="panel">
-          <ul class="clean" style="color:#cfd5e6;">
-            <li>Select an option (A, B, or C) and confirm target launch date</li>
-            <li>We provision the project, confirm IDX provider details, and begin design</li>
-            <li>Media day scheduled; delivery of edit(s) and photo galleries within 1-3 days</li>
-            <li>Go‑live with QA (Quality Assurance), analytics, and training; 30‑day optimization window</li>
-          </ul>
-          <div class="btns">
-            <a class="btn primary" href="mailto:hello@cochranfilms.com?subject=Cross%20Creek%20—%20Proposal%20Acceptance">Approve & Schedule</a>
-            <a class="btn ghost" href="#pricing">Compare Options</a>
+        <h2>Portfolio — Real Estate</h2>
+        <p class="lead">A few videos and photos that show the look we aim for.</p>
+
+        <div class="video-grid" style="margin-top:12px;">
+          <div class="video">
+            <video src="https://video.wixstatic.com/video/aeef42_6d072f431c614174b57772be4f27e2a0/720p/mp4/file.mp4" controls playsinline preload="metadata" title="Screen Recording 1"></video>
+          </div>
+          <div class="video">
+            <video src="https://video.wixstatic.com/video/aeef42_12009d6adef241b691032667d1cfdf0e/720p/mp4/file.mp4" controls playsinline preload="metadata" title="Screen Recording 2"></video>
+          </div>
+          <div class="video">
+            <video src="https://video.wixstatic.com/video/aeef42_7ff200d9091145dc8aa7845e368cea47/720p/mp4/file.mp4" controls playsinline preload="metadata" title="Screen Recording 3"></video>
+          </div>
+          <div class="video">
+            <video src="https://video.wixstatic.com/video/aeef42_d285d32ebeaf47c2bc2a1a337a1ad830/720p/mp4/file.mp4" controls playsinline preload="metadata" title="Screen Recording 4"></video>
           </div>
         </div>
-        <p class="note" style="margin-top:10px;">Prepared by Cochran Films. Pricing valid for 30 days. Hosting, IDX licensing, and third‑party fees (if required) are billed at cost.</p>
+
+        <div class="gallery" style="margin-top:16px;">
+          <figure>
+            <img alt="Exterior — front elevation" src="./CC__1871-HDR.jpg">
+            <figcaption>Front elevation — clean and bright presentation.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Exterior — side view" src="./CC__6615.jpg">
+            <figcaption>Side view — balanced exposure and lines.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Aerial — property overview" src="./DJI_0276.jpg">
+            <figcaption>Aerial overview — shows setting and lot context.</figcaption>
+          </figure>
+          <figure class="centerpiece">
+            <img alt="Liberty Communities preview" src="./Liberty_Communities_Preview_NOWM.jpg">
+            <figcaption>Liberty Communities — exterior preview still.</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 

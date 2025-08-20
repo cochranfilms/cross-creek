@@ -47,6 +47,21 @@
       .foot{padding:28px 0 60px; color:#9aa1b6; font-size:14px}
 
       @media (max-width: 960px){ .pricing .tier{grid-column:span 12} }
+      /* Mobile optimizations */
+      @media (max-width: 720px){
+        .wrap{padding:0 16px}
+        section{padding:48px 0}
+        h1{font-size:30px}
+        .btn{padding:10px 14px}
+        .nav-inner{padding:10px 0}
+        .nav a{margin-left:12px; font-size:13px}
+        .pricing{gap:12px}
+        .tier{padding:18px}
+      }
+      @media (max-width: 420px){
+        h1{font-size:26px}
+        .btn{padding:10px 12px; border-radius:8px}
+      }
     </style>
   </head>
   <body>

@@ -119,6 +119,25 @@
         .cards .card, .pricing .tier, .gallery figure { grid-column: span 12; height: auto; }
         .video-grid .video { grid-column: span 12; }
       }
+
+      /* Mobile optimizations without altering desktop */
+      @media (max-width: 720px) {
+        .wrap { padding: 0 16px; }
+        section { padding: 48px 0; }
+        h1 { font-size: 32px; }
+        .btn { padding: 10px 14px; }
+        .nav-inner { padding: 10px 0; }
+        .nav a { margin-left: 12px; font-size: 13px; }
+        .cards { grid-template-columns: 1fr !important; }
+        .cards .card { grid-column: span 12; }
+        .gallery img { height: 140px; }
+        .preview::before { padding-top: 65%; }
+      }
+      @media (max-width: 420px) {
+        h1 { font-size: 28px; }
+        .btn { padding: 10px 12px; border-radius: 8px; }
+        .brand small { display: none; }
+      }
     </style>
   </head>
   <body>

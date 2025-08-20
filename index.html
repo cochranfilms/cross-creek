@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cross Creek Realty — Digital Upgrade Proposal | Cochran Films</title>
+    <link rel="icon" href="./logo.webp">
     <meta name="description" content="A focused, corporate-grade proposal for Cross Creek Realty: website reboot, IDX reliability, conversion system, and media production.">
     <style>
       :root {
@@ -29,7 +30,8 @@
         background: rgba(11,14,42,.9); border-bottom: 1px solid rgba(255,255,255,.08);
       }
       .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
-      .brand { color: #fff; font-weight: 700; letter-spacing: .6px; }
+      .brand { display:flex; align-items:center; gap:10px; color: #fff; font-weight: 700; letter-spacing: .6px; }
+      .brand img { height: 22px; width:auto; }
       .brand small { color: var(--gold); font-weight: 600; }
       .nav a { color: #e9ecf4; margin-left: 18px; font-weight: 600; font-size: 14px; opacity: .95; }
 
@@ -86,6 +88,15 @@
       .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
       .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
 
+      /* Lightbox for visuals */
+      .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.72); display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+      .lightbox.open { display: flex; }
+      .lightbox .frame { position: relative; max-width: 96vw; max-height: 92vh; background: #000; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+      .lightbox img { display: block; max-width: 96vw; max-height: 86vh; width: auto; height: auto; }
+      .lightbox .cap { color: #e9ecf4; background: rgba(0,0,0,.6); padding: 8px 12px; font-size: 13px; }
+      .lightbox .close { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,.92); color: #111; border: 0; border-radius: 999px; padding: 8px 10px; font-weight: 700; cursor: pointer; }
+      .gallery img { cursor: zoom-in; }
+
       .dark { background: var(--ink); color: #e9ecf4; }
       .dark h2 { color: #fff; }
       .dark .panel { background: #121739; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 18px; }
@@ -102,11 +113,12 @@
   <body>
     <div class="nav">
       <div class="wrap nav-inner">
-        <div class="brand">Cochran Films <small>— Proposal</small></div>
+        <div class="brand"><img src="./logo.webp" alt="Cross Creek Realty"> Cochran Films <small>— Proposal</small></div>
         <div>
           <a href="#summary">Summary</a>
           <a href="#scope">Scope</a>
           <a href="./pricing.html">Quote</a>
+          <a href="./idx-demo.html">IDX Demo</a>
           <a href="#work">Visuals</a>
         </div>
       </div>
@@ -323,9 +335,43 @@
       </div>
     </section>
 
+    <!-- Lightbox root for enlarging visuals -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <div class="frame">
+        <button class="close" id="lbClose">Close</button>
+        <img id="lbImg" alt="Expanded visual">
+        <div class="cap" id="lbCap"></div>
+      </div>
+    </div>
+
     <div class="wrap foot">
       <div>© 2025 Cochran Films — Confidential. For Cross Creek Realty review.</div>
     </div>
+    <script>
+      // Simple lightbox for screenshots and gallery images
+      (function(){
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbCap = document.getElementById('lbCap');
+        const close = () => { lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); lbImg.src=''; lbCap.textContent=''; };
+        document.getElementById('lbClose').addEventListener('click', close);
+        lb.addEventListener('click', (e)=>{ if (e.target === lb) close(); });
+        document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
+        // Delegate clicks from any .gallery img
+        document.addEventListener('click', (e) => {
+          const img = e.target;
+          if (img && img.tagName === 'IMG' && img.closest('.gallery')) {
+            const fig = img.closest('figure');
+            const cap = fig?.querySelector('figcaption')?.textContent || img.alt || '';
+            lbImg.src = img.src;
+            lbImg.alt = img.alt || 'Expanded visual';
+            lbCap.textContent = cap;
+            lb.classList.add('open');
+            lb.setAttribute('aria-hidden','false');
+          }
+        }, true);
+      })();
+    </script>
   </body>
 </html>
 

@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cross Creek Realty — Project Status</title>
+    <meta name="description" content="Cross Creek Realty — 4‑phase project status and progress tracker (template demo)." />
+    <link rel="icon" href="./logo.webp" />
+    <style>
+      :root {
+        --ink:#0b0e2a; --gold:#c7a86b; --slate:#2f3446; --soft:#f7f7f9; --muted:#7b8093; --card:#ffffff;
+        --border:#e6e6ef; --panel:#ffffff; --panel-ink:#1b1e2b; --accent:#c7a86b; --shadow:0 8px 28px rgba(11,14,42,.08);
+        --radius:16px;
+      }
+      html[data-theme="dark"] {
+        --soft:#0b0e2a; --panel:#121739; --panel-ink:#e9ecf4; --border:rgba(255,255,255,.12); --shadow:0 24px 60px rgba(0,0,0,.55);
+      }
+      *{box-sizing:border-box}
+      html,body{margin:0}
+      body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:var(--soft); color:var(--panel-ink)}
+
+      /* Top bar */
+      .topbar{position:sticky;top:0;z-index:10;background:rgba(11,14,42,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+      .topbar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:10px;justify-content:space-between;padding:12px 16px;color:#e9ecf4}
+      .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+      .brand img{height:26px;width:auto}
+      .toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.25);border-radius:999px;color:#fff;background:rgba(255,255,255,.06);padding:6px 10px;cursor:pointer;font-weight:800;font-size:12px}
+      .wrap{max-width:1200px;margin:0 auto;padding:18px}
+
+      .grid{display:grid;gap:16px}
+      @media(min-width:960px){.cols-3{grid-template-columns:1.2fr 1fr 1fr}}
+      .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+      .head{padding:12px 14px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-bottom:1px solid var(--border);font-weight:900}
+      .body{padding:14px}
+      .muted{color:var(--muted)}
+      .pill{display:inline-block;background:#f1efe9;color:#5a4a22;border-radius:999px;padding:.35rem .65rem;font-size:12px;font-weight:800}
+
+      /* Progress ring */
+      .progress{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}
+      .ring{width:140px;height:140px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--p)*1%), rgba(0,0,0,.08) 0)}
+      .ring-inner{width:108px;height:108px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.06);border:1px solid var(--border)}
+      .ring strong{font-size:26px}
+
+      /* Timeline */
+      .timeline{position:relative}
+      .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+      .step{position:relative;padding:10px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.6)}
+      html[data-theme="dark"] .step{background:rgba(255,255,255,.04)}
+      .step .dot{position:absolute;top:-8px;left:12px;width:14px;height:14px;border-radius:50%;background:#444;border:2px solid var(--border)}
+      .step.active{outline:2px solid rgba(199,168,107,.45);background:linear-gradient(180deg, rgba(199,168,107,.15), rgba(199,168,107,.06))}
+      .step.active .dot{background:var(--gold);box-shadow:0 0 0 6px rgba(199,168,107,.18)}
+      .step.complete{outline:2px solid rgba(11,181,122,.3);background:linear-gradient(180deg, rgba(11,181,122,.15), rgba(11,181,122,.06))}
+      .step.complete .dot{background:#0bb57a;box-shadow:0 0 0 6px rgba(11,181,122,.18)}
+      .bar{position:absolute;left:0;right:0;top:18px;height:3px;background:rgba(0,0,0,.08)}
+      html[data-theme="dark"] .bar{background:rgba(255,255,255,.08)}
+      .bar > span{display:block;height:100%;width:var(--bar,0%);background:linear-gradient(90deg,#c7a86b,#0bb57a)}
+
+      /* Table */
+      table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+      th,td{padding:.65rem .8rem;border-bottom:1px solid var(--border);text-align:left}
+      thead th{background:var(--ink);color:#fff;font-weight:900}
+      tbody tr:nth-child(even) td{background:rgba(0,0,0,.02)}
+
+      /* Preview */
+      .preview{border-radius:14px;border:1px solid var(--border);overflow:hidden;background:rgba(255,255,255,.02)}
+      .preview iframe{width:100%;height:420px;border:0;background:#111}
+
+      /* Controls */
+      .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+      .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .8rem;border-radius:12px;border:1px solid var(--border);text-decoration:none;font-weight:800;cursor:pointer;background:#fff}
+      .btn.primary{background:var(--gold);color:#111;border-color:#b5965f}
+      select,input[type="number"]{padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#111}
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <img src="./logo.webp" alt="Cross Creek Realty" />
+          <span>Cross Creek Realty — Project Status</span>
+        </div>
+        <a id="themeToggle" class="toggle" href="#"><span id="themeLabel">Dark</span></a>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="card" style="margin-bottom:16px">
+        <div class="body">
+          <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
+            <div>
+              <strong>Template Demo</strong>
+              <div class="muted">4‑phase status tracker included in the $5,000 relaunch package.</div>
+            </div>
+            <div class="controls">
+              <label class="muted">Phase</label>
+              <select id="phaseSelect" aria-label="Select current phase">
+                <option value="Phase 1">Phase 1 — Discovery & Plan</option>
+                <option value="Phase 2">Phase 2 — Build & Integrate</option>
+                <option value="Phase 3">Phase 3 — Content & QA</option>
+                <option value="Phase 4">Phase 4 — Launch & Handoff</option>
+              </select>
+              <label class="muted">Progress</label>
+              <input id="progressInput" type="number" min="0" max="100" value="10" style="width:88px" />
+              <button class="btn primary" id="applyProgress">Update</button>
+              <button class="btn" data-preset="25">25%</button>
+              <button class="btn" data-preset="50">50%</button>
+              <button class="btn" data-preset="75">75%</button>
+              <button class="btn" data-preset="100">100%</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="grid cols-3">
+        <article class="card">
+          <div class="head">Overview</div>
+          <div class="body">
+            <div class="progress">
+              <div class="ring" style="--p:10"><div class="ring-inner"><strong id="pct">10%</strong></div></div>
+              <div>
+                <div style="font-weight:900;font-size:18px">Current Phase: <span id="phaseLabel">Phase 1 — Discovery & Plan</span></div>
+                <div class="muted" id="eta">ETA: Target window based on scope</div>
+                <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                  <span class="pill">Scope v1.0</span>
+                  <span class="pill">Owner: Cochran Films</span>
+                  <span class="pill">Client: Cross Creek Realty</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="head">Milestones</div>
+          <div class="body">
+            <ul class="muted" style="margin:0;padding-left:1.1rem">
+              <li>Phase 1: Strategy, sitemap, wireframes</li>
+              <li>Phase 2: UI build, IDX demo wiring, performance</li>
+              <li>Phase 3: Content load, QA, accessibility</li>
+              <li>Phase 4: Launch, analytics, handoff</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="head">Next Actions</div>
+          <div class="body">
+            <ul class="muted" id="nextActions" style="margin:0;padding-left:1.1rem">
+              <li>Finalize homepage and navigation</li>
+              <li>Hook up IDX demo and saved searches</li>
+              <li>Prepare quote and package overview</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="card" style="margin-top:16px">
+        <div class="head">Project Timeline</div>
+        <div class="body timeline">
+          <div class="bar"><span id="barFill" style="--bar:10%"></span></div>
+          <div class="steps" id="steps">
+            <div class="step active" data-phase="Phase 1"><span class="dot"></span><strong>Phase 1</strong><small class="muted" style="display:block;margin-top:6px">Discovery & Plan</small></div>
+            <div class="step" data-phase="Phase 2"><span class="dot"></span><strong>Phase 2</strong><small class="muted" style="display:block;margin-top:6px">Build & Integrate</small></div>
+            <div class="step" data-phase="Phase 3"><span class="dot"></span><strong>Phase 3</strong><small class="muted" style="display:block;margin-top:6px">Content & QA</small></div>
+            <div class="step" data-phase="Phase 4"><span class="dot"></span><strong>Phase 4</strong><small class="muted" style="display:block;margin-top:6px">Launch & Handoff</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid" style="margin-top:16px">
+        <article class="card">
+          <div class="head">Weekly Updates</div>
+          <div class="body">
+            <table>
+              <thead><tr><th>Date</th><th>Update</th><th>Status</th></tr></thead>
+              <tbody id="updates">
+                <tr><td>Week 1</td><td>Kickoff, strategy outline, asset intake</td><td><span class="pill">In Progress</span></td></tr>
+                <tr><td>Week 2</td><td>Homepage and listings demo pass</td><td><span class="pill">Planned</span></td></tr>
+                <tr><td>Week 3</td><td>Content load, QA checklist</td><td><span class="pill">Planned</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="head">Live Previews (Demo)</div>
+          <div class="body" style="display:grid;gap:12px">
+            <div>
+              <div class="muted" style="margin:0 0 6px 0">Proposal</div>
+              <div class="preview"><iframe src="./index.html" title="Proposal"></iframe></div>
+            </div>
+            <div>
+              <div class="muted" style="margin:0 0 6px 0">Pricing</div>
+              <div class="preview"><iframe src="./pricing.html" title="Pricing"></iframe></div>
+            </div>
+            <div>
+              <div class="muted" style="margin:0 0 6px 0">IDX Demo</div>
+              <div class="preview"><iframe src="./idx-demo.html" title="IDX Demo"></iframe></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <p class="muted" style="text-align:center;margin:20px 0">Tip: Add query params like <code>?progress=45&phase=Phase 2</code> to prefill the demo.</p>
+    </main>
+
+    <script>
+      // Theme toggle
+      (function(){
+        const root = document.documentElement;
+        const btn = document.getElementById('themeToggle');
+        const label = document.getElementById('themeLabel');
+        const saved = localStorage.getItem('ccr-status-theme');
+        if (saved) { root.setAttribute('data-theme', saved); label.textContent = saved === 'dark' ? 'Light' : 'Dark'; }
+        btn?.addEventListener('click', (e)=>{
+          e.preventDefault();
+          const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('ccr-status-theme', next);
+          label.textContent = next === 'dark' ? 'Light' : 'Dark';
+        });
+      })();
+
+      // Status logic (simple, client‑side)
+      (function(){
+        const params = new URLSearchParams(location.search);
+        const pct = Math.max(0, Math.min(100, parseInt(params.get('progress')||'10', 10)));
+        const phaseParam = params.get('phase') || 'Phase 1';
+        const ring = document.querySelector('.ring');
+        const pctEl = document.getElementById('pct');
+        const bar = document.getElementById('barFill');
+        const phaseLabel = document.getElementById('phaseLabel');
+        const select = document.getElementById('phaseSelect');
+        const input = document.getElementById('progressInput');
+
+        function setProgress(n){
+          const v = Math.max(0, Math.min(100, parseInt(n||'0',10)));
+          ring?.style.setProperty('--p', v);
+          bar?.style.setProperty('--bar', v + '%');
+          if (pctEl) pctEl.textContent = v + '%';
+          input.value = String(v);
+        }
+        function setPhase(phaseValue){
+          const full = {
+            'Phase 1':'Phase 1 — Discovery & Plan',
+            'Phase 2':'Phase 2 — Build & Integrate',
+            'Phase 3':'Phase 3 — Content & QA',
+            'Phase 4':'Phase 4 — Launch & Handoff'
+          }[phaseValue] || phaseValue;
+          phaseLabel.textContent = full;
+          // update timeline markers
+          Array.from(document.querySelectorAll('.step')).forEach(s=>{
+            s.classList.remove('active','complete');
+            const name = s.dataset.phase;
+            if (name === phaseValue) s.classList.add('active');
+            const order = {'Phase 1':1,'Phase 2':2,'Phase 3':3,'Phase 4':4}[phaseValue] || 1;
+            const me = {'Phase 1':1,'Phase 2':2,'Phase 3':3,'Phase 4':4}[name] || 1;
+            if (me < order) s.classList.add('complete');
+          });
+          select.value = phaseValue;
+        }
+
+        // init from params
+        setProgress(pct);
+        setPhase(phaseParam);
+
+        // wiring
+        document.getElementById('applyProgress')?.addEventListener('click', ()=> setProgress(input.value));
+        document.querySelectorAll('[data-preset]')?.forEach(b=> b.addEventListener('click', ()=> setProgress(b.getAttribute('data-preset'))));
+        select?.addEventListener('change', ()=> setPhase(select.value));
+      })();
+    </script>
+  </body>
+</html>
+
+

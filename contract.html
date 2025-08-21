@@ -285,7 +285,8 @@
     const EMAILJS_CONFIG = {
       publicKey: 'p4pF3OWvh-DXtae4c',
       serviceId: 'service_t11yvru',
-      templateId: 'template_placeholder' // You'll need to replace this with the actual template ID
+      templateId: 'contract-client-ccr', // Client confirmation template
+      adminTemplateId: 'contract-admin-ccr' // Admin notification template
     };
     
     // Initialize EmailJS
@@ -344,8 +345,8 @@
           throw new Error('EmailJS not available');
         }
         
-        // Prepare email parameters
-        const emailParams = {
+        // Prepare client email parameters
+        const clientEmailParams = {
           to_email: contractData.clientEmail,
           client_name: contractData.clientName,
           client_email: contractData.clientEmail,
@@ -353,23 +354,44 @@
           contract_date: contractData.contractDate
         };
         
-        console.log('📧 Sending confirmation email with params:', emailParams);
+        console.log('📧 Sending client confirmation email with params:', clientEmailParams);
         
-        // Send email using EmailJS
-        const response = await emailjs.send(
+        // Send client confirmation email
+        const clientResponse = await emailjs.send(
           EMAILJS_CONFIG.serviceId, 
           EMAILJS_CONFIG.templateId, 
-          emailParams
+          clientEmailParams
         );
         
-        console.log('✅ Confirmation email sent successfully:', response);
+        console.log('✅ Client confirmation email sent successfully:', clientResponse);
+        
+        // Prepare admin email parameters
+        const adminEmailParams = {
+          to_email: 'info@cochranfilms.com',
+          client_name: contractData.clientName,
+          client_email: contractData.clientEmail,
+          contract_id: contractData.contractId,
+          contract_date: contractData.contractDate,
+          download_link: `/api/contracts?filename=CrossCreek_Contract_${contractData.clientName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}_${contractData.contractId}.pdf`
+        };
+        
+        console.log('📧 Sending admin notification email with params:', adminEmailParams);
+        
+        // Send admin notification email
+        const adminResponse = await emailjs.send(
+          EMAILJS_CONFIG.serviceId, 
+          EMAILJS_CONFIG.adminTemplateId, 
+          adminEmailParams
+        );
+        
+        console.log('✅ Admin notification email sent successfully:', adminResponse);
         
         // Show success message
-        showEmailStatus('✅ Confirmation email sent successfully!', 'success');
+        showEmailStatus('✅ Confirmation emails sent successfully!', 'success');
         
       } catch (error) {
-        console.error('❌ Error sending confirmation email:', error);
-        showEmailStatus('⚠️ Email could not be sent, but your contract is signed. We\'ll contact you soon.', 'error');
+        console.error('❌ Error sending confirmation emails:', error);
+        showEmailStatus('⚠️ Emails could not be sent, but your contract is signed. We\'ll contact you soon.', 'error');
       }
     }
     

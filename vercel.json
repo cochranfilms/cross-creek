@@ -11,10 +11,5 @@
       "src": "/api/(.*)",
       "dest": "/api/$1"
     }
-  ],
-  "env": {
-    "GITHUB_TOKEN": "@github-token",
-    "GITHUB_OWNER": "cochranfilms",
-    "GITHUB_REPO": "cross-creek"
-  }
+  ]
 }

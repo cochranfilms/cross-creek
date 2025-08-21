@@ -401,7 +401,23 @@
         console.log('=== ERROR DETAILS END ===');
         
         // Also show in status for debugging
-        showEmailStatus(`⚠️ Email error: ${error.message || 'Unknown error'}`, 'error');
+        const errorMessage = `⚠️ Email error: ${error.message || 'Unknown error'}`;
+        showEmailStatus(errorMessage, 'error');
+        
+        // Add error details to page for debugging
+        const emailStatus = document.getElementById('emailStatus');
+        if (emailStatus) {
+          const errorDetails = document.createElement('div');
+          errorDetails.style.cssText = 'margin-top: 10px; padding: 10px; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; color: #721c24; font-size: 12px; font-family: monospace;';
+          errorDetails.innerHTML = `
+            <strong>Debug Info:</strong><br>
+            Admin Template ID: ${EMAILJS_CONFIG.adminTemplateId}<br>
+            Service ID: ${EMAILJS_CONFIG.serviceId}<br>
+            Error: ${error.message || 'Unknown'}<br>
+            Stack: ${error.stack ? error.stack.substring(0, 200) + '...' : 'No stack'}
+          `;
+          emailStatus.appendChild(errorDetails);
+        }
       }
     }
     

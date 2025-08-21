@@ -376,6 +376,8 @@
         };
         
         console.log('📧 Sending admin notification email with params:', adminEmailParams);
+        console.log('📧 Using service ID:', EMAILJS_CONFIG.serviceId);
+        console.log('📧 Using admin template ID:', EMAILJS_CONFIG.adminTemplateId);
         
         // Send admin notification email
         const adminResponse = await emailjs.send(
@@ -390,14 +392,16 @@
         showEmailStatus('✅ Confirmation emails sent successfully!', 'success');
         
       } catch (error) {
-        console.error('❌ Error sending confirmation emails:', error);
-        console.error('❌ Error details:', {
-          message: error.message,
-          stack: error.stack,
-          adminTemplateId: EMAILJS_CONFIG.adminTemplateId,
-          serviceId: EMAILJS_CONFIG.serviceId
-        });
-        showEmailStatus('⚠️ Emails could not be sent, but your contract is signed. We\'ll contact you soon.', 'error');
+        // Log error details directly to avoid hook.js truncation
+        console.log('=== ERROR DETAILS START ===');
+        console.log('Error message:', error.message);
+        console.log('Error stack:', error.stack);
+        console.log('Admin template ID:', EMAILJS_CONFIG.adminTemplateId);
+        console.log('Service ID:', EMAILJS_CONFIG.serviceId);
+        console.log('=== ERROR DETAILS END ===');
+        
+        // Also show in status for debugging
+        showEmailStatus(`⚠️ Email error: ${error.message || 'Unknown error'}`, 'error');
       }
     }
     

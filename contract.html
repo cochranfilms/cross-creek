@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Service Agreement – Cochran Films x Cross Creek Realty</title>
+  
+  <!-- PDF Generation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #000;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #000;
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    .download-btn {
+      background-color: #28a745;
+      color: #fff;
+    }
+    .download-btn:hover {
+      background-color: #218838;
+    }
+    .hidden {
+      display: none;
+    }
+    .thank-you-screen {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 12px;
+      margin-top: 30px;
+      border: 2px solid #28a745;
+    }
+    .thank-you-screen h2 {
+      color: #28a745;
+      margin-bottom: 20px;
+    }
+    .next-steps {
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      margin: 25px 0;
+      text-align: left;
+      border-left: 4px solid #28a745;
+    }
+    .next-steps h3 {
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+    .next-steps ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .next-steps li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .contract-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #333;
+    }
+    .signature-section {
+      border-top: 2px solid #e9ecef;
+      padding-top: 25px;
+      margin-top: 25px;
+    }
+    .signature-section h3 {
+      color: #000;
+      margin-bottom: 15px;
+    }
+    .signature-note {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border-left: 4px solid #007bff;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Website & Media Production Agreement</h1>
+
+  <p>This Service Agreement is made between <strong>Cochran Films LLC</strong> and <strong>Cross Creek Realty</strong> on this day, August 21, 2025.</p>
+
+  <h2>Scope of Work</h2>
+  <p>Cochran Films will provide the following services to Cross Creek Realty:</p>
+  <ul>
+    <li><strong>Website Rebuild</strong> — Full redesign with stable IDX integration and lead funnels, delivered in 4 phases with a goal to complete in <strong>2 weeks or less</strong>. Delays will be communicated proactively and resolved within 24 hours where possible.</li>
+    <li><strong>IDX/MLS Integration</strong> — Includes connection to MLS system, fallback contact forms, and smart search features.</li>
+    <li><strong>SEO + Tracking Setup</strong> — Basic SEO including schema markup and Google Analytics 4 connection.</li>
+    <li><strong>Media Production</strong> — Includes:
+      <ul>
+        <li>1 real estate walkthrough video (up to 60 seconds) <em>OR</em> two 30-second clips</li>
+        <li>1 agent-focused video (up to 60 seconds)</li>
+        <li>15–20 professionally edited property photos</li>
+        <li>Photos/videos delivered via an online gallery</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>Timeline</h2>
+  <p>
+    The full project timeline from start to handoff is estimated to take <strong>23 to 24 days</strong> to complete, based on the structured 4-phase roadmap we've built together.
+    However, our shared goal is to complete the majority of this work in <strong>under 2 weeks</strong> wherever possible. We will provide updates in real-time and handle any change requests or questions within 24 hours, so your time is never wasted and the project stays on track.
+  </p>
+
+  <h2>Media Shoot Details</h2>
+  <p>
+    The photo and video shoot is estimated to take no more than <strong>3–4 hours</strong>. Scheduling is flexible and based on Cross Creek's availability, but should ideally occur within 10 business days from contract execution.
+  </p>
+
+  <h2>Deliverables</h2>
+  <ul>
+    <li>Website redesign hosted on existing or transferred domain</li>
+    <li>Stabilized IDX listing experience</li>
+    <li>Custom branded videos and photography</li>
+    <li>Secure media gallery access</li>
+    <li>30-day post-launch support</li>
+  </ul>
+
+  <h2>Cost & Payment</h2>
+  <p>
+    Total Fee: <strong>$3,000 USD</strong><br>
+    Payment Terms:
+    <ul>
+      <li><strong>$1,500 due upfront</strong> upon contract signing</li>
+      <li><strong>$1,500 due on the first day of production</strong> (media shoot)</li>
+    </ul>
+    All deliverables from the media production (videos and photos) will be delivered to Cross Creek Realty within <strong>24–72 hours</strong> following the production day via a secure Google Drive link.
+  </p>
+  <p><strong>Accepted Payment Methods:</strong></p>
+  <ul>
+    <li><strong>Zelle</strong> (preferred for fast transfer) — details available upon request</li>
+    <li><strong>ACH (Automated Clearing House)</strong> bank transfer</li>
+    <li><strong>Check</strong> made payable to <em>Cochran Films</em></li>
+    <li><strong>Debit/Credit Card</strong> via secure link on the official invoice</li>
+    <li><strong>Official Invoice</strong> — an itemized invoice will be sent via email with payment link and due dates</li>
+  </ul>
+
+  <h2>Signatures</h2>
+  <p>By signing below, both parties agree to the terms outlined in this agreement.</p>
+
+  <!-- Contract Form -->
+  <div id="contractForm" class="contract-form">
+    <form id="signatureForm">
+      <div class="form-group">
+        <label for="clientName">Cross Creek Realty Representative Name</label>
+        <input type="text" id="clientName" name="clientName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="clientEmail">Email</label>
+        <input type="email" id="clientEmail" name="clientEmail" required />
+      </div>
+
+      <div class="signature-section">
+        <h3>Digital Signature</h3>
+        <div class="signature-note">
+          <strong>Note:</strong> Please type your full name exactly as it appears on official documents. This will serve as your digital signature and is legally binding.
+        </div>
+        <div class="form-group">
+          <label for="signature">Digital Signature</label>
+          <textarea id="signature" name="signature" placeholder="Type your full name as your signature" required></textarea>
+        </div>
+      </div>
+
+      <button type="submit">Sign & Submit</button>
+    </form>
+  </div>
+
+  <!-- Thank You Screen (Hidden by default) -->
+  <div id="thankYouScreen" class="thank-you-screen hidden">
+    <h2>🎉 Thank You for Signing!</h2>
+    <p>Your contract has been successfully signed and submitted. We're excited to get started on your project!</p>
+    
+    <div class="next-steps">
+      <h3>📋 What Happens Next</h3>
+      <ul>
+        <li><strong>Cochran Films is getting to work</strong> - We'll begin the website rebuild and media production planning immediately</li>
+        <li><strong>We'll contact you within 24 hours</strong> to discuss any additional information needed and confirm next steps</li>
+        <li><strong>Project timeline will be shared</strong> with detailed milestones and delivery dates</li>
+        <li><strong>Media shoot scheduling</strong> will be coordinated based on your availability</li>
+        <li><strong>Regular updates</strong> will be provided throughout the project</li>
+      </ul>
+    </div>
+    
+    <p><strong>Questions?</strong> Feel free to reach out to us at <a href="mailto:info@cochranfilms.com">info@cochranfilms.com</a></p>
+    
+    <button id="downloadContractBtn" class="download-btn" onclick="downloadContractPDF()">
+      📄 Download Signed Contract PDF
+    </button>
+  </div>
+
+  <p style="margin-top: 40px; font-size: 14px; color: #777;">© 2025 Cochran Films — All rights reserved</p>
+
+  <script>
+    // Store contract data for PDF generation
+    let contractData = {};
+    
+    // Handle form submission
+    document.getElementById('signatureForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const clientName = document.getElementById('clientName').value.trim();
+      const clientEmail = document.getElementById('clientEmail').value.trim();
+      const signature = document.getElementById('signature').value.trim();
+      
+      // Validate inputs
+      if (!clientName || !clientEmail || !signature) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      // Store contract data
+      contractData = {
+        clientName: clientName,
+        clientEmail: clientEmail,
+        signature: signature,
+        signatureDate: new Date().toLocaleDateString(),
+        contractDate: 'August 21, 2025',
+        contractId: 'CCR-' + Date.now()
+      };
+      
+      // Hide form and show thank you screen
+      document.getElementById('contractForm').classList.add('hidden');
+      document.getElementById('thankYouScreen').classList.remove('hidden');
+      
+      // Scroll to thank you screen
+      document.getElementById('thankYouScreen').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Generate and download PDF contract
+    function downloadContractPDF() {
+      try {
+        // Check if jsPDF is loaded
+        if (typeof window.jspdf === 'undefined') {
+          alert('PDF generation library not loaded. Please refresh the page and try again.');
+          return;
+        }
+        
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // ==================== HEADER ====================
+        doc.setFillColor(255, 178, 0);
+        doc.rect(0, 0, 210, 25, 'F');
+        
+        doc.setFontSize(20);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('COCHRAN FILMS', 105, 12, { align: 'center' });
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'normal');
+        doc.text('WEBSITE & MEDIA PRODUCTION AGREEMENT', 105, 20, { align: 'center' });
+        
+        // ==================== CONTRACT METADATA ====================
+        doc.setFontSize(9);
+        doc.setTextColor(100, 100, 100);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Contract ID: ${contractData.contractId}`, 20, 35);
+        doc.text(`Effective Date: ${contractData.contractDate}`, 20, 40);
+        
+        // ==================== CLIENT INFORMATION ====================
+        doc.setFillColor(255, 178, 0);
+        doc.rect(20, 50, 170, 8, 'F');
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
+        
+        // Client info box
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, 65, 170, 25, 'F');
+        doc.setDrawColor(255, 178, 0);
+        doc.setLineWidth(0.5);
+        doc.rect(20, 65, 170, 25, 'S');
+        
+        doc.setFontSize(8);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CROSS CREEK REALTY', 25, 72);
+        
+        doc.setFontSize(7);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Representative: ${contractData.clientName}`, 25, 78);
+        doc.text(`Email: ${contractData.clientEmail}`, 25, 82);
+        doc.text(`Contract Date: ${contractData.contractDate}`, 25, 86);
+        
+        // ==================== PROJECT DETAILS ====================
+        doc.setFillColor(255, 178, 0);
+        doc.rect(20, 100, 170, 8, 'F');
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('PROJECT DETAILS', 105, 106, { align: 'center' });
+        
+        doc.setFontSize(8);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        
+        const projectDetails = [
+          'Website Rebuild with IDX integration',
+          'SEO + Tracking Setup',
+          'Media Production (videos + photos)',
+          'Total Fee: $3,000 USD',
+          'Timeline: 23-24 days (goal: under 2 weeks)',
+          'Payment: $1,500 upfront + $1,500 on production day'
+        ];
+        
+        let yPos = 120;
+        projectDetails.forEach(detail => {
+          doc.text(`• ${detail}`, 25, yPos);
+          yPos += 6;
+        });
+        
+        // ==================== SIGNATURES ====================
+        const signatureY = yPos + 20;
+        
+        doc.setFillColor(255, 178, 0);
+        doc.rect(20, signatureY - 5, 170, 8, 'F');
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CONTRACT SIGNATURES', 105, signatureY + 2, { align: 'center' });
+        
+        // Company signature (pre-signed)
+        doc.setFontSize(8);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('COCHRAN FILMS (COMPANY)', 20, signatureY + 15);
+        
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, signatureY + 20, 75, 25, 'F');
+        doc.setDrawColor(255, 178, 0);
+        doc.setLineWidth(0.5);
+        doc.rect(20, signatureY + 20, 75, 25, 'S');
+        
+        doc.setFontSize(6);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Authorized Signature:', 25, signatureY + 26);
+        
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'italic');
+        doc.text('Cody Cochran', 25, signatureY + 32);
+        
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.3);
+        doc.line(25, signatureY + 34, 85, signatureY + 34);
+        
+        doc.setFontSize(6);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Title: Founder & CEO', 25, signatureY + 38);
+        doc.text('Date: ' + contractData.contractDate, 25, signatureY + 42);
+        
+        // Client signature
+        doc.setFontSize(8);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CROSS CREEK REALTY SIGNATURE', 105, signatureY + 15);
+        
+        doc.setFillColor(248, 249, 250);
+        doc.rect(105, signatureY + 20, 75, 25, 'F');
+        doc.setDrawColor(255, 178, 0);
+        doc.setLineWidth(0.5);
+        doc.rect(105, signatureY + 20, 75, 25, 'S');
+        
+        doc.setFontSize(6);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Representative:', 115, signatureY + 26);
+        
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'italic');
+        doc.text(contractData.clientName, 115, signatureY + 32);
+        
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.3);
+        doc.line(115, signatureY + 34, 175, signatureY + 34);
+        
+        doc.setFontSize(6);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Signature: ' + contractData.signature, 115, signatureY + 38);
+        doc.text('Date: ' + contractData.signatureDate, 115, signatureY + 42);
+        
+        // ==================== FOOTER ====================
+        const footerY = 260;
+        
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, footerY - 5, 170, 20, 'F');
+        doc.setDrawColor(255, 178, 0);
+        doc.setLineWidth(0.3);
+        doc.rect(20, footerY - 5, 170, 20, 'S');
+        
+        doc.setFontSize(6);
+        doc.setTextColor(100, 100, 100);
+        doc.setFont('helvetica', 'normal');
+        doc.text('This contract was digitally signed and is legally binding under Georgia law.', 105, footerY + 3, { align: 'center' });
+        doc.text('Generated by Cochran Films Contract Portal • ' + new Date().toLocaleDateString(), 105, footerY + 8, { align: 'center' });
+        doc.text('Contract ID: ' + contractData.contractId, 105, footerY + 13, { align: 'center' });
+        
+        // Save PDF with descriptive filename
+        const fileName = `CrossCreek_Contract_${contractData.clientName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}_${contractData.contractId}.pdf`;
+        doc.save(fileName);
+        
+        console.log('✅ Contract PDF generated and downloaded successfully');
+        
+      } catch (error) {
+        console.error('❌ Error generating PDF:', error);
+        alert('There was an error generating the PDF. Please try again or contact support.');
+      }
+    }
+  </script>
+</body>
+</html>

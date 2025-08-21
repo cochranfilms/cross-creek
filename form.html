@@ -9,6 +9,7 @@
   <script type="text/javascript">
     (function() {
       emailjs.init("p4pF3OWvh-DXtae4c");
+      console.log('EmailJS initialized with user ID:', "p4pF3OWvh-DXtae4c");
     })();
   </script>
   <style>
@@ -268,6 +269,11 @@
           successMsg.scrollIntoView({ behavior: 'smooth' });
         }, function(error) {
           console.log('FAILED...', error);
+          console.log('Error details:', {
+            status: error.status,
+            text: error.text,
+            response: error.response
+          });
           
           // Show error message
           errorMsg.style.display = 'block';

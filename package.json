@@ -1,7 +1,7 @@
 {
-  "name": "cross-creek-contracts",
+  "name": "cochran-films-landing",
   "version": "1.0.0",
-  "description": "Cross Creek Realty Contract Management System",
+  "description": "Cochran Films contract management system with secure GitHub integration",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,17 +9,18 @@
     "build": "echo 'Static site - no build required'",
     "deploy": "vercel --prod"
   },
+  "keywords": [
+    "contract",
+    "github",
+    "api",
+    "secure"
+  ],
+  "author": "Cody Cochran",
+  "license": "MIT",
   "dependencies": {
     "@octokit/rest": "^19.0.13"
   },
   "devDependencies": {
     "vercel": "^32.0.0"
-  },
-  "keywords": [
-    "contracts",
-    "real-estate",
-    "vercel"
-  ],
-  "author": "Cochran Films",
-  "license": "MIT"
+  }
 }

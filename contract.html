@@ -391,6 +391,12 @@
         
       } catch (error) {
         console.error('❌ Error sending confirmation emails:', error);
+        console.error('❌ Error details:', {
+          message: error.message,
+          stack: error.stack,
+          adminTemplateId: EMAILJS_CONFIG.adminTemplateId,
+          serviceId: EMAILJS_CONFIG.serviceId
+        });
         showEmailStatus('⚠️ Emails could not be sent, but your contract is signed. We\'ll contact you soon.', 'error');
       }
     }

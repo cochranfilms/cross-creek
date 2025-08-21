@@ -372,14 +372,29 @@
           client_email: contractData.clientEmail,
           contract_id: contractData.contractId,
           contract_date: contractData.contractDate,
-          download_link: `/api/contracts?filename=CrossCreek_Contract_${contractData.clientName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}_${contractData.contractId}.pdf`
+          download_link: 'Generating...' // Will be updated after GitHub upload
         };
         
         console.log('📧 Sending admin notification email with params:', adminEmailParams);
         console.log('📧 Using service ID:', EMAILJS_CONFIG.serviceId);
         console.log('📧 Using admin template ID:', EMAILJS_CONFIG.adminTemplateId);
         
-        // Send admin notification email
+        // Upload signed contract PDF to GitHub first
+        let uploadResult = null;
+        try {
+          uploadResult = await uploadContractToGitHub(contractData);
+          console.log('✅ Contract PDF uploaded to GitHub successfully');
+          
+          // Update admin email with real download link
+          adminEmailParams.download_link = uploadResult.downloadUrl;
+          
+        } catch (uploadError) {
+          console.warn('⚠️ Could not upload contract to GitHub:', uploadError);
+          // Use fallback download link if upload fails
+          adminEmailParams.download_link = `https://raw.githubusercontent.com/cochranfilms/cross-creek/main/contracts/CrossCreek_Contract_${contractData.clientName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}_${contractData.contractId}.pdf`;
+        }
+        
+        // Send admin notification email with updated download link
         const adminResponse = await emailjs.send(
           EMAILJS_CONFIG.serviceId, 
           EMAILJS_CONFIG.adminTemplateId, 
@@ -427,6 +442,272 @@
       emailStatus.textContent = message;
       emailStatus.className = `email-status email-${type}`;
       emailStatus.classList.remove('hidden');
+    }
+    
+    // Upload signed contract PDF to GitHub
+    async function uploadContractToGitHub(contractData) {
+      try {
+        console.log('📤 Starting contract upload to GitHub...');
+        
+        // Generate the PDF first
+        const pdfBlob = await generateContractPDFBlob(contractData);
+        
+        // Create filename
+        const filename = `CrossCreek_Contract_${contractData.clientName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}_${contractData.contractId}.pdf`;
+        
+        // Convert PDF blob to base64
+        const base64Content = await blobToBase64(pdfBlob);
+        
+        // Upload to GitHub using the API
+        const uploadResult = await uploadFileToGitHub(filename, base64Content, contractData);
+        
+        console.log('✅ Contract PDF uploaded to GitHub successfully:', uploadResult);
+        return uploadResult;
+        
+      } catch (error) {
+        console.error('❌ Error uploading contract to GitHub:', error);
+        throw error;
+      }
+    }
+    
+    // Convert blob to base64
+    function blobToBase64(blob) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64 = reader.result.split(',')[1];
+          resolve(base64);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    }
+    
+    // Upload file to GitHub using secure Vercel API
+    async function uploadFileToGitHub(filename, base64Content, contractData) {
+      try {
+        console.log('📤 Uploading to GitHub via Vercel API:', filename);
+        
+        // Use our secure Vercel API endpoint
+        const apiUrl = '/api/upload-contract';
+        
+        // Prepare the request payload
+        const payload = {
+          filename: filename,
+          content: base64Content,
+          contractData: contractData
+        };
+        
+        // Make the API request to our secure endpoint
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(`Upload API error: ${errorData.error || response.statusText}`);
+        }
+        
+        const result = await response.json();
+        console.log('✅ File uploaded successfully:', result.downloadUrl);
+        
+        return {
+          success: true,
+          filename: filename,
+          downloadUrl: result.downloadUrl,
+          sha: result.sha
+        };
+        
+      } catch (error) {
+        console.error('❌ GitHub upload failed:', error);
+        throw error;
+      }
+    }
+    
+    // Generate contract PDF as blob for upload
+    async function generateContractPDFBlob(contractData) {
+      try {
+        // Use the existing PDF generation logic
+        const { jsPDF } = window.jspdf;
+        if (!jsPDF) {
+          throw new Error('jsPDF library not loaded');
+        }
+        
+        const doc = new jsPDF();
+        
+        // Add the same PDF content as your existing downloadContractPDF function
+        // Header
+        doc.setFillColor(255, 178, 0);
+        doc.rect(0, 0, 210, 25, 'F');
+        
+        doc.setFontSize(20);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('COCHRAN FILMS', 105, 12, { align: 'center' });
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'normal');
+        doc.text('WEBSITE & MEDIA PRODUCTION AGREEMENT', 105, 20, { align: 'center' });
+        
+        // Contract metadata
+        doc.setFontSize(9);
+        doc.setTextColor(100, 100, 100);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Contract ID: ${contractData.contractId}`, 20, 35);
+        doc.text(`Effective Date: ${contractData.contractDate}`, 20, 40);
+        
+        // Client information
+        doc.setFillColor(255, 178, 0);
+        doc.rect(20, 50, 170, 8, 'F');
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
+        
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, 65, 170, 25, 'F');
+        doc.setDrawColor(255, 178, 0);
+        doc.setLineWidth(0.5);
+        doc.rect(20, 65, 170, 25, 'S');
+        
+        doc.setFontSize(8);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CROSS CREEK REALTY', 25, 72);
+        
+        doc.setFontSize(7);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Representative: ${contractData.clientName}`, 25, 78);
+        doc.text(`Email: ${contractData.clientEmail}`, 25, 82);
+        doc.text(`Contract Date: ${contractData.contractDate}`, 25, 86);
+        
+        // Project details
+        doc.setFillColor(255, 178, 0);
+        doc.rect(20, 100, 170, 8, 'F');
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('PROJECT DETAILS', 105, 106, { align: 'center' });
+        
+        doc.setFontSize(8);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        
+        const projectDetails = [
+          'Website Rebuild with IDX integration',
+          'SEO + Tracking Setup',
+          'Media Production (videos + photos)',
+          'Total Fee: $3,000 USD',
+          'Timeline: 23-24 days (goal: under 2 weeks)',
+          'Payment: $1,500 upfront + $1,500 on production day'
+        ];
+        
+        let yPos = 120;
+        projectDetails.forEach(detail => {
+          doc.text(`• ${detail}`, 25, yPos);
+          yPos += 6;
+        });
+        
+        // Signatures
+        const signatureY = yPos + 20;
+        
+        doc.setFillColor(255, 178, 0);
+        doc.rect(20, signatureY - 5, 170, 8, 'F');
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CONTRACT SIGNATURES', 105, signatureY + 2, { align: 'center' });
+        
+        // Company signature
+        doc.setFontSize(8);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('COCHRAN FILMS (COMPANY)', 20, signatureY + 15);
+        
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, signatureY + 20, 75, 25, 'F');
+        doc.setDrawColor(255, 178, 0);
+        doc.setLineWidth(0.5);
+        doc.rect(20, signatureY + 20, 75, 25, 'S');
+        
+        doc.setFontSize(6);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Authorized Signature:', 25, signatureY + 26);
+        
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'italic');
+        doc.text('Cody Cochran', 25, signatureY + 32);
+        
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.3);
+        doc.line(25, signatureY + 34, 85, signatureY + 34);
+        
+        doc.setFontSize(6);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Title: Founder & CEO', 25, signatureY + 38);
+        doc.text('Date: ' + contractData.contractDate, 25, signatureY + 42);
+        
+        // Client signature
+        doc.setFontSize(8);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('CROSS CREEK REALTY SIGNATURE', 105, signatureY + 15);
+        
+        doc.setFillColor(248, 249, 250);
+        doc.rect(105, signatureY + 20, 75, 25, 'F');
+        doc.setDrawColor(255, 178, 0);
+        doc.setLineWidth(0.5);
+        doc.rect(105, signatureY + 20, 75, 25, 'S');
+        
+        doc.setFontSize(6);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Representative:', 115, signatureY + 26);
+        
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'italic');
+        doc.text(contractData.clientName, 115, signatureY + 32);
+        
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.3);
+        doc.line(115, signatureY + 34, 175, signatureY + 34);
+        
+        doc.setFontSize(6);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Signature: ' + contractData.signature, 115, signatureY + 38);
+        doc.text('Date: ' + contractData.signatureDate, 115, signatureY + 42);
+        
+        // Footer
+        const footerY = 260;
+        
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, footerY - 5, 170, 20, 'F');
+        doc.setDrawColor(255, 178, 0);
+        doc.setLineWidth(0.3);
+        doc.rect(20, footerY - 5, 170, 20, 'S');
+        
+        doc.setFontSize(6);
+        doc.setTextColor(100, 100, 100);
+        doc.setFont('helvetica', 'normal');
+        doc.text('This contract was digitally signed and is legally binding under Georgia law.', 105, footerY + 3, { align: 'center' });
+        doc.text('Generated by Cochran Films Contract Portal • ' + new Date().toLocaleDateString(), 105, footerY + 8, { align: 'center' });
+        doc.text('Contract ID: ' + contractData.contractId, 105, footerY + 13, { align: 'center' });
+        
+        // Convert to blob
+        const pdfBlob = doc.output('blob');
+        return pdfBlob;
+        
+      } catch (error) {
+        console.error('❌ Error generating contract PDF blob:', error);
+        throw error;
+      }
     }
     
     // Generate and download PDF contract

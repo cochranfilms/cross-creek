@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cross Creek Realty — Project Intake</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
     (function() {
@@ -242,6 +243,14 @@
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit'
+      });
+      
+      // Debug: Log what we're sending
+      console.log('Sending EmailJS request with:', {
+        user_id: 'p4pF3OWvh-DXtae4c',
+        service_id: 'service_t11yvru',
+        template_id: 'project-intake',
+        template_params: templateParams
       });
       
       // Send email using EmailJS

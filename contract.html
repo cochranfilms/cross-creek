@@ -10,6 +10,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   
+  <!-- EmailJS for sending confirmation emails -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,6 +23,22 @@
       color: #333;
       line-height: 1.6;
     }
+    
+    .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .logo-container img {
+      max-width: 200px;
+      height: auto;
+      border-radius: 8px;
+    }
+    
     h1, h2 {
       color: #000;
     }
@@ -118,9 +137,30 @@
       border-left: 4px solid #007bff;
       font-size: 14px;
     }
+    .email-status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .email-success {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+    }
+    .email-error {
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Cross Creek Realty Logo -->
+  <div class="logo-container">
+    <img src="logo.webp" alt="Cross Creek Realty Logo" />
+  </div>
 
   <h1>Website & Media Production Agreement</h1>
 
@@ -233,11 +273,31 @@
     <button id="downloadContractBtn" class="download-btn" onclick="downloadContractPDF()">
       📄 Download Signed Contract PDF
     </button>
+    
+    <!-- Email Status Display -->
+    <div id="emailStatus" class="email-status hidden"></div>
   </div>
 
   <p style="margin-top: 40px; font-size: 14px; color: #777;">© 2025 Cochran Films — All rights reserved</p>
 
   <script>
+    // EmailJS Configuration
+    const EMAILJS_CONFIG = {
+      publicKey: 'p4pF3OWvh-DXtae4c',
+      serviceId: 'service_t11yvru',
+      templateId: 'template_placeholder' // You'll need to replace this with the actual template ID
+    };
+    
+    // Initialize EmailJS
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+        console.log('✅ EmailJS initialized successfully');
+      } else {
+        console.warn('⚠️ EmailJS library not loaded');
+      }
+    });
+    
     // Store contract data for PDF generation
     let contractData = {};
     
@@ -272,7 +332,54 @@
       
       // Scroll to thank you screen
       document.getElementById('thankYouScreen').scrollIntoView({ behavior: 'smooth' });
+      
+      // Send confirmation email
+      sendConfirmationEmail(contractData);
     });
+    
+    // Send confirmation email via EmailJS
+    async function sendConfirmationEmail(contractData) {
+      try {
+        if (typeof emailjs === 'undefined') {
+          throw new Error('EmailJS not available');
+        }
+        
+        // Prepare email parameters
+        const emailParams = {
+          to_email: contractData.clientEmail,
+          client_name: contractData.clientName,
+          client_email: contractData.clientEmail,
+          contract_id: contractData.contractId,
+          contract_date: contractData.contractDate
+        };
+        
+        console.log('📧 Sending confirmation email with params:', emailParams);
+        
+        // Send email using EmailJS
+        const response = await emailjs.send(
+          EMAILJS_CONFIG.serviceId, 
+          EMAILJS_CONFIG.templateId, 
+          emailParams
+        );
+        
+        console.log('✅ Confirmation email sent successfully:', response);
+        
+        // Show success message
+        showEmailStatus('✅ Confirmation email sent successfully!', 'success');
+        
+      } catch (error) {
+        console.error('❌ Error sending confirmation email:', error);
+        showEmailStatus('⚠️ Email could not be sent, but your contract is signed. We\'ll contact you soon.', 'error');
+      }
+    }
+    
+    // Show email status message
+    function showEmailStatus(message, type) {
+      const emailStatus = document.getElementById('emailStatus');
+      emailStatus.textContent = message;
+      emailStatus.className = `email-status email-${type}`;
+      emailStatus.classList.remove('hidden');
+    }
     
     // Generate and download PDF contract
     function downloadContractPDF() {

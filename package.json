@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vercel dev",
+    "build": "echo 'Static site - no build required'",
     "deploy": "vercel --prod"
   },
   "dependencies": {

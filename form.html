@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cross Creek Realty — Project Intake</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+      background: #f7f7f9;
+      color: #1b1e2b;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #0b0e2a;
+    }
+    h2 {
+      color: #c7a86b;
+      margin-top: 32px;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin: 12px 0 6px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #dcdced;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .section {
+      background: #ffffff;
+      border: 1px solid #e6e6ef;
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .submit-btn {
+      background: #c7a86b;
+      color: #111;
+      border: none;
+      padding: 12px 24px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cross Creek Realty — Full Project Intake</h1>
+
+  <form name="cross-creek-project-intake">
+
+    <!-- PHASE 1 — Discovery -->
+    <div class="section">
+      <h2>Phase 1 — Discovery & Brand Assets</h2>
+
+      <label for="brand-logo">Link to official logo(s)</label>
+      <input type="url" id="brand-logo" name="brand-logo" placeholder="Google Drive, Dropbox, or website link"/>
+
+      <label for="brand-fonts">Do you have brand fonts or typography guidelines?</label>
+      <input type="text" id="brand-fonts" name="brand-fonts" placeholder="List names or link to brand guide" />
+
+      <label for="brand-colors">Do you have brand color values (HEX/RGB)?</label>
+      <input type="text" id="brand-colors" name="brand-colors" placeholder="e.g. #FFB200, #000000"/>
+
+      <label for="page-content">What core pages do you want on the site?</label>
+      <textarea id="page-content" name="page-content" placeholder="e.g. Home, About, Contact, Listings, Blog, Careers, etc."></textarea>
+
+      <label for="micro-pages">Do you want dedicated pages for neighborhoods or micro-communities?</label>
+      <select id="micro-pages" name="micro-pages">
+        <option value="">Select one</option>
+        <option>Yes — I'd like to build community landing pages</option>
+        <option>Maybe — Need help deciding</option>
+        <option>No — Just main pages</option>
+      </select>
+
+      <label for="micro-page-examples">If yes or maybe, what areas or neighborhoods should be highlighted?</label>
+      <textarea id="micro-page-examples" name="micro-page-examples" placeholder="e.g. Buckhead, Vinings, Midtown, etc."></textarea>
+
+      <label for="custom-content">Any additional content or messaging you'd like included on specific pages?</label>
+      <textarea id="custom-content" name="custom-content" placeholder="Optional – for team bios, market stats, testimonials, etc."></textarea>
+    </div>
+
+    <!-- PHASE 2 — IDX/MLS + Features -->
+    <div class="section">
+      <h2>Phase 2 — IDX Integration & Lead Capture</h2>
+
+      <label for="mls-access">Do you currently have access to your MLS/IDX provider?</label>
+      <select id="mls-access" name="mls-access">
+        <option value="">Select one</option>
+        <option>Yes — We’ll provide credentials</option>
+        <option>No — Need help getting set up</option>
+        <option>Not sure</option>
+      </select>
+
+      <label for="mls-region">Which MLS region do you use?</label>
+      <input id="mls-region" name="mls-region" placeholder="e.g. FMLS, Georgia MLS, Bright MLS" />
+
+      <label for="mls-login">MLS/IDX Portal Login Email</label>
+      <input type="email" id="mls-login" name="mls-login" placeholder="agent@yourdomain.com" />
+
+      <label for="mls-api">MLS API Key / IDX Token (optional)</label>
+      <input id="mls-api" name="mls-api" placeholder="Paste API key or token here" />
+
+      <label for="site-features">What key site features do you want integrated?</label>
+      <textarea id="site-features" name="site-features" placeholder="e.g. Saved searches, advanced filters, booking calendar, 3D tours, maps, etc."></textarea>
+
+      <label for="lead-capture">How should buyer/seller leads be routed?</label>
+      <select id="lead-capture" name="lead-capture">
+        <option value="">Select one</option>
+        <option>Email to agent</option>
+        <option>Into CRM</option>
+        <option>Both</option>
+      </select>
+
+      <label for="crm-tool">Do you use a CRM or lead management platform?</label>
+      <input id="crm-tool" name="crm-tool" placeholder="e.g. FollowUpBoss, LionDesk, Real Geeks" />
+    </div>
+
+    <!-- PHASE 3 — Content & QA -->
+    <div class="section">
+      <h2>Phase 3 — Content Population & QA</h2>
+
+      <label for="listing-media">Do you have recent photos/videos of your agents or office?</label>
+      <select id="listing-media" name="listing-media">
+        <option value="">Select one</option>
+        <option>Yes — We’ll share them</option>
+        <option>No — Need them captured</option>
+        <option>Partial — Some assets ready</option>
+      </select>
+
+      <label for="community-photos">Any neighborhood imagery or video you’d like featured?</label>
+      <textarea id="community-photos" name="community-photos"></textarea>
+
+      <label for="blog-content">Will you be providing written content (e.g. bios, blogs, service descriptions)?</label>
+      <select id="blog-content" name="blog-content">
+        <option value="">Select one</option>
+        <option>Yes — We will supply content</option>
+        <option>No — We need help writing it</option>
+        <option>A mix of both</option>
+      </select>
+    </div>
+
+    <!-- PHASE 4 — Launch & Handoff -->
+    <div class="section">
+      <h2>Phase 4 — Launch & Admin Access</h2>
+
+      <label for="domain-registrar">Where is your domain registered?</label>
+      <input id="domain-registrar" name="domain-registrar" placeholder="e.g. GoDaddy, Google Domains, Squarespace" />
+
+      <label for="team-editors">Who on your team should have site editing access?</label>
+      <textarea id="team-editors" name="team-editors" placeholder="Please list names and emails if known"></textarea>
+
+      <label for="training-support">Do you want post-launch training and support?</label>
+      <select id="training-support" name="training-support">
+        <option value="">Select one</option>
+        <option>Yes — Please train our team</option>
+        <option>Maybe — Let’s discuss</option>
+        <option>No — We’ll handle it in-house</option>
+      </select>
+
+      <label for="ongoing-needs">Do you want ongoing SEO, blog writing, or monthly updates?</label>
+      <textarea id="ongoing-needs" name="ongoing-needs" placeholder="Optional – we'll tailor a support plan if needed"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Project Intake</button>
+  </form>
+</body>
+</html>

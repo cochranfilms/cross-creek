@@ -212,6 +212,20 @@
     </ul>
     All deliverables from the media production (videos and photos) will be delivered to Cross Creek Realty within <strong>24–72 hours</strong> following the production day via a secure Google Drive link.
   </p>
+  
+  <h3>Monthly Recurring Service Fee</h3>
+  <p>
+    In addition to the initial project fee, Cross Creek Realty agrees to a <strong>$1,200 monthly recurring service fee</strong> for ongoing media production services. This monthly fee includes one of the following options per month:
+  </p>
+  <ul>
+    <li><strong>Option 1:</strong> 60 second property walk-through video, + 15-20 Professional Property Photos & Drone, + One community event per month (one property)</li>
+    <li><strong>Option 2:</strong> 30 second Property/Agent Videos, + 15-20 Professional Property Photos & Drone, + One community event per month (one property)</li>
+    <li><strong>Option 3:</strong> B-roll video footage of 2 properties (2 hours per property, must be same day), + One community event per month</li>
+  </ul>
+  <p>
+    The monthly service fee will begin <strong>30 days after project completion</strong> and will be billed monthly via invoice. Cross Creek Realty may cancel this monthly service at any time. Upon cancellation, the final payment will be due immediately, all deliverables will be turned over to Cross Creek Realty, and Cochran Films will no longer be contracted by Cross Creek Realty.
+  </p>
+  
   <p><strong>Accepted Payment Methods:</strong></p>
   <ul>
     <li><strong>Zelle</strong> (preferred for fast transfer) — details available upon request</li>
@@ -279,6 +293,73 @@
   </div>
 
   <p style="margin-top: 40px; font-size: 14px; color: #777;">© 2025 Cochran Films — All rights reserved</p>
+
+  <!-- Optional Property Listing Options -->
+  <div style="font-family:Arial, sans-serif; font-size:14px; color:#333333; line-height:1.5; margin-top: 60px; padding: 30px; background: #f8f9fa; border-radius: 12px; border: 2px solid #FFB200;">
+    <h2 style="margin:0 0 10px 0; font-size:18px; font-weight:bold; color:#000;">
+      📦 Media Package Options – Cross Creek Realty
+    </h2>
+
+    <p style="margin:0 0 15px 0;">
+      Thank you for the opportunity to partner with Cross Creek Realty. Below are our most popular real estate media packages, followed by a milestone-based payment plan and complimentary offerings.
+    </p>
+    
+    <p style="margin:0 0 15px 0; padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; color: #856404;">
+      <strong>📋 Important:</strong> A minimum booking of at least 5 listings is required to receive these package prices.
+    </p>
+
+
+
+    <!-- Packages -->
+    <h3 style="margin:15px 0 6px 0; font-size:16px; font-weight:bold;">Available Packages</h3>
+
+    <p style="margin:8px 0;"><strong>Option 1 – Basic Photo + Video</strong><br/>
+    15 property photos, 1 interior walkthrough (60 sec), basic correction.<br/>
+    <strong>$450 per listing</strong></p>
+
+    <p style="margin:8px 0;"><strong>Option 2 – Standard + Drone Aerials</strong><br/>
+    20+ photos, walkthrough video, 4–5 drone shots, aerial flyover.<br/>
+    <strong>$650 per listing</strong></p>
+
+    <p style="margin:8px 0;"><strong>Option 3 – Premium Brand Bundle</strong><br/>
+    25+ photos, full walkthrough, drone package, 30 sec agent intro.<br/>
+    <strong>$950 per listing</strong></p>
+
+    <p style="margin:8px 0;"><strong>Option 4 – Full Team Showcase</strong><br/>
+    Up to 30 photos, walkthrough + drone, group/team photos, retouching.<br/>
+    <strong>$1,200 per listing</strong></p>
+
+    <p style="margin:8px 0;"><strong>Option 5 – 10 Listing Bundle (Custom)</strong><br/>
+    20–25 photos + walkthrough + drone for 10 listings, agent intros on 3.<br/>
+    <strong>Starting at $5,500 total</strong></p>
+
+    <!-- Payment Phases -->
+    <h3 style="margin:20px 0 6px 0; font-size:16px; font-weight:bold;">💳 Payment Phases</h3>
+    <ul style="margin:0 0 15px 18px; padding:0;">
+      <li>25% due at project start</li>
+      <li>25% due after every 3rd property (3rd, 6th, 9th)</li>
+      <li>Final 25% due after 10th property</li>
+    </ul>
+
+    <!-- Free Offerings -->
+    <h3 style="margin:20px 0 6px 0; font-size:16px; font-weight:bold;">🎁 Special FREE Offerings</h3>
+    <p style="margin:0 0 10px 0; font-weight:bold; color:#d0362e;">
+      ✅ FREE 2-Hour iPhone Videography Class (up to 8 agents)<br/>
+      <span style="font-weight:normal; color:#333;">Sponsored by <em>Course Creator Academy</em></span>
+    </p>
+    <p style="margin:0 0 15px 0;">
+      Hands-on training for your team to create polished property content using only their iPhones.
+    </p>
+
+    <p style="margin:0 0 10px 0; font-weight:bold; color:#d0362e;">
+      ✅ FREE 1-Minute "From the CEO" Video Message
+    </p>
+    <p style="margin:0;">
+      A professional CEO video for website, social media, or campaigns — adding a personal, trustworthy touch to your brand.
+    </p>
+
+
+  </div>
 
   <script>
     // EmailJS Configuration
@@ -528,83 +609,84 @@
       }
     }
     
-    // Generate contract PDF as blob for upload
-    async function generateContractPDFBlob(contractData) {
-      try {
-        // Use the existing PDF generation logic
-        const { jsPDF } = window.jspdf;
-        if (!jsPDF) {
-          throw new Error('jsPDF library not loaded');
-        }
-        
-        const doc = new jsPDF();
-        
-        // Add the same PDF content as your existing downloadContractPDF function
-        // Header
-        doc.setFillColor(255, 178, 0);
-        doc.rect(0, 0, 210, 25, 'F');
-        
-        doc.setFontSize(20);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'bold');
-        doc.text('COCHRAN FILMS', 105, 12, { align: 'center' });
-        
-        doc.setFontSize(14);
-        doc.setFont('helvetica', 'normal');
-        doc.text('WEBSITE & MEDIA PRODUCTION AGREEMENT', 105, 20, { align: 'center' });
-        
-        // Contract metadata
-        doc.setFontSize(9);
-        doc.setTextColor(100, 100, 100);
-        doc.setFont('helvetica', 'normal');
-        doc.text(`Contract ID: ${contractData.contractId}`, 20, 35);
-        doc.text(`Effective Date: ${contractData.contractDate}`, 20, 40);
-        
-        // Client information
-        doc.setFillColor(255, 178, 0);
-        doc.rect(20, 50, 170, 8, 'F');
-        doc.setFontSize(10);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'bold');
-        doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
-        
-        doc.setFillColor(248, 249, 250);
-        doc.rect(20, 65, 170, 25, 'F');
-        doc.setDrawColor(255, 178, 0);
-        doc.setLineWidth(0.5);
-        doc.rect(20, 65, 170, 25, 'S');
-        
-        doc.setFontSize(8);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'bold');
-        doc.text('CROSS CREEK REALTY', 25, 72);
-        
-        doc.setFontSize(7);
-        doc.setFont('helvetica', 'normal');
-        doc.text(`Representative: ${contractData.clientName}`, 25, 78);
-        doc.text(`Email: ${contractData.clientEmail}`, 25, 82);
-        doc.text(`Contract Date: ${contractData.contractDate}`, 25, 86);
-        
-        // Project details
-        doc.setFillColor(255, 178, 0);
-        doc.rect(20, 100, 170, 8, 'F');
-        doc.setFontSize(10);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'bold');
-        doc.text('PROJECT DETAILS', 105, 106, { align: 'center' });
-        
-        doc.setFontSize(8);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
-        
-        const projectDetails = [
-          'Website Rebuild with IDX integration',
-          'SEO + Tracking Setup',
-          'Media Production (videos + photos)',
-          'Total Fee: $3,000 USD',
-          'Timeline: 23-24 days (goal: under 2 weeks)',
-          'Payment: $1,500 upfront + $1,500 on production day'
-        ];
+            // Generate contract PDF as blob for upload
+        async function generateContractPDFBlob(contractData) {
+          try {
+            // Use the existing PDF generation logic
+            const { jsPDF } = window.jspdf;
+            if (!jsPDF) {
+              throw new Error('jsPDF library not loaded');
+            }
+            
+            const doc = new jsPDF();
+            
+            // Add the same PDF content as your existing downloadContractPDF function
+            // Header
+            doc.setFillColor(255, 178, 0);
+            doc.rect(0, 0, 210, 25, 'F');
+            
+            doc.setFontSize(20);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont('helvetica', 'bold');
+            doc.text('COCHRAN FILMS', 105, 12, { align: 'center' });
+            
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'normal');
+            doc.text('WEBSITE & MEDIA PRODUCTION AGREEMENT', 105, 20, { align: 'center' });
+            
+            // Contract metadata
+            doc.setFontSize(9);
+            doc.setTextColor(100, 100, 100);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Contract ID: ${contractData.contractId}`, 20, 35);
+            doc.text(`Effective Date: ${contractData.contractDate}`, 20, 40);
+            
+            // Client information
+            doc.setFillColor(255, 178, 0);
+            doc.rect(20, 50, 170, 8, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont('helvetica', 'bold');
+            doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
+            
+            doc.setFillColor(248, 249, 250);
+            doc.rect(20, 65, 170, 25, 'F');
+            doc.setDrawColor(255, 178, 0);
+            doc.setLineWidth(0.5);
+            doc.rect(20, 65, 170, 25, 'S');
+            
+            doc.setFontSize(8);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont('helvetica', 'bold');
+            doc.text('CROSS CREEK REALTY', 25, 72);
+            
+            doc.setFontSize(7);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Representative: ${contractData.clientName}`, 25, 78);
+            doc.text(`Email: ${contractData.clientEmail}`, 25, 82);
+            doc.text(`Contract Date: ${contractData.contractDate}`, 25, 86);
+            
+            // Project details
+            doc.setFillColor(255, 178, 0);
+            doc.rect(20, 100, 170, 8, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont('helvetica', 'bold');
+            doc.text('PROJECT DETAILS', 105, 106, { align: 'center' });
+            
+            doc.setFontSize(8);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont('helvetica', 'normal');
+            
+            const projectDetails = [
+              'Website Rebuild with IDX integration',
+              'SEO + Tracking Setup',
+              'Media Production (videos + photos)',
+              'Total Fee: $3,000 USD',
+              'Timeline: 23-24 days (goal: under 2 weeks)',
+              'Payment: $1,500 upfront + $1,500 on production day',
+              'Monthly Recurring Fee: $1,200 (begins 30 days after completion)'
+            ];
         
         let yPos = 120;
         projectDetails.forEach(detail => {
@@ -786,7 +868,8 @@
           'Media Production (videos + photos)',
           'Total Fee: $3,000 USD',
           'Timeline: 23-24 days (goal: under 2 weeks)',
-          'Payment: $1,500 upfront + $1,500 on production day'
+          'Payment: $1,500 upfront + $1,500 on production day',
+          'Monthly Recurring Fee: $1,200 (begins 30 days after completion)'
         ];
         
         let yPos = 120;

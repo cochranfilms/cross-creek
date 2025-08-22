@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cross Creek Realty — Project Intake</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
-  <!-- EmailJS removed - now using server-side API -->
+  
+  <!-- EmailJS for sending confirmation emails -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
@@ -73,6 +76,25 @@
       padding: 15px;
       border-radius: 10px;
       margin-top: 20px;
+      display: none;
+    }
+    .email-status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .email-success {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+    }
+    .email-error {
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
+    .hidden {
       display: none;
     }
   </style>
@@ -206,13 +228,35 @@
     <strong>Oops!</strong> There was an error submitting your form. Please try again or contact us directly.
   </div>
 
+  <!-- Email Status Display -->
+  <div id="emailStatus" class="email-status hidden"></div>
+
   <script>
+    // EmailJS Configuration
+    const EMAILJS_CONFIG = {
+      publicKey: 'p4pF3OWvh-DXtae4c',
+      serviceId: 'service_t11yvru',
+      templateId: 'project-intake' // Project intake template ID
+    };
+    
+    // Initialize EmailJS
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+        console.log('✅ EmailJS initialized successfully');
+      } else {
+        console.warn('⚠️ EmailJS library not loaded');
+      }
+    });
+    
+    // Handle form submission
     document.getElementById('project-intake-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       
       const submitBtn = document.getElementById('submit-btn');
       const successMsg = document.getElementById('success-message');
       const errorMsg = document.getElementById('error-message');
+      const emailStatus = document.getElementById('emailStatus');
       
       // Disable submit button and show loading state
       submitBtn.disabled = true;
@@ -221,6 +265,7 @@
       // Hide any previous messages
       successMsg.style.display = 'none';
       errorMsg.style.display = 'none';
+      emailStatus.classList.add('hidden');
       
       try {
         // Get form data
@@ -242,24 +287,21 @@
         });
         
         // Debug: Log what we're sending
-        console.log('Sending project intake form data:', templateParams);
+        console.log('📧 Sending project intake form data:', templateParams);
         
-        // Send form data to our Vercel API endpoint
-        const response = await fetch('/api/project-intake', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(templateParams)
-        });
-        
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Failed to submit form');
+        // Check if EmailJS is available
+        if (typeof emailjs === 'undefined') {
+          throw new Error('EmailJS library not loaded');
         }
         
-        const result = await response.json();
-        console.log('Form submitted successfully:', result);
+        // Send email using EmailJS
+        const response = await emailjs.send(
+          EMAILJS_CONFIG.serviceId, 
+          EMAILJS_CONFIG.templateId, 
+          templateParams
+        );
+        
+        console.log('✅ Project intake email sent successfully:', response);
         
         // Show success message
         successMsg.style.display = 'block';
@@ -270,21 +312,50 @@
         // Scroll to success message
         successMsg.scrollIntoView({ behavior: 'smooth' });
         
+        // Show email success status
+        showEmailStatus('✅ Project intake form submitted successfully!', 'success');
+        
       } catch (error) {
-        console.log('FAILED...', error);
-        console.log('Error details:', error.message);
+        console.error('❌ Error submitting project intake form:', error);
         
         // Show error message
         errorMsg.style.display = 'block';
         
         // Scroll to error message
         errorMsg.scrollIntoView({ behavior: 'smooth' });
+        
+        // Show email error status
+        const errorMessage = `⚠️ Email error: ${error.message || 'Unknown error'}`;
+        showEmailStatus(errorMessage, 'error');
+        
+        // Add error details to page for debugging
+        if (emailStatus) {
+          const errorDetails = document.createElement('div');
+          errorDetails.style.cssText = 'margin-top: 10px; padding: 10px; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; color: #721c24; font-size: 12px; font-family: monospace;';
+          errorDetails.innerHTML = `
+            <strong>Debug Info:</strong><br>
+            Template ID: ${EMAILJS_CONFIG.templateId}<br>
+            Service ID: ${EMAILJS_CONFIG.serviceId}<br>
+            Error: ${error.message || 'Unknown'}<br>
+            Stack: ${error.stack ? error.stack.substring(0, 200) + '...' : 'No stack'}
+          `;
+          emailStatus.appendChild(errorDetails);
+        }
+        
       } finally {
         // Re-enable submit button
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Project Intake';
       }
     });
+    
+    // Show email status message
+    function showEmailStatus(message, type) {
+      const emailStatus = document.getElementById('emailStatus');
+      emailStatus.textContent = message;
+      emailStatus.className = `email-status email-${type}`;
+      emailStatus.classList.remove('hidden');
+    }
   </script>
 </body>
 </html>

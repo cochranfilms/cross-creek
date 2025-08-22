@@ -5,13 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cross Creek Realty — Project Intake</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function() {
-      emailjs.init("p4pF3OWvh-DXtae4c");
-      console.log('EmailJS initialized with user ID:', "p4pF3OWvh-DXtae4c");
-    })();
-  </script>
+  <!-- EmailJS removed - now using server-side API -->
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
@@ -213,7 +207,7 @@
   </div>
 
   <script>
-    document.getElementById('project-intake-form').addEventListener('submit', function(e) {
+    document.getElementById('project-intake-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       
       const submitBtn = document.getElementById('submit-btn');
@@ -228,64 +222,68 @@
       successMsg.style.display = 'none';
       errorMsg.style.display = 'none';
       
-      // Get form data
-      const formData = new FormData(e.target);
-      const templateParams = {};
-      
-      // Convert form data to EmailJS template parameters
-      for (let [key, value] of formData.entries()) {
-        templateParams[key] = value || 'Not provided';
-      }
-      
-      // Add submission date
-      templateParams.form_submit_date = new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-      
-      // Debug: Log what we're sending
-      console.log('Sending EmailJS request with:', {
-        user_id: 'p4pF3OWvh-DXtae4c',
-        service_id: 'service_t11yvru',
-        template_id: 'project-intake',
-        template_params: templateParams
-      });
-      
-      // Send email using EmailJS
-      emailjs.send('p4pF3OWvh-DXtae4c', 'service_t11yvru', 'project-intake', templateParams)
-        .then(function(response) {
-          console.log('SUCCESS!', response.status, response.text);
-          
-          // Show success message
-          successMsg.style.display = 'block';
-          
-          // Reset form
-          e.target.reset();
-          
-          // Scroll to success message
-          successMsg.scrollIntoView({ behavior: 'smooth' });
-        }, function(error) {
-          console.log('FAILED...', error);
-          console.log('Error details:', {
-            status: error.status,
-            text: error.text,
-            response: error.response
-          });
-          
-          // Show error message
-          errorMsg.style.display = 'block';
-          
-          // Scroll to error message
-          errorMsg.scrollIntoView({ behavior: 'smooth' });
-        })
-        .finally(function() {
-          // Re-enable submit button
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Project Intake';
+      try {
+        // Get form data
+        const formData = new FormData(e.target);
+        const templateParams = {};
+        
+        // Convert form data to template parameters
+        for (let [key, value] of formData.entries()) {
+          templateParams[key] = value || 'Not provided';
+        }
+        
+        // Add submission date
+        templateParams.form_submit_date = new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
         });
+        
+        // Debug: Log what we're sending
+        console.log('Sending project intake form data:', templateParams);
+        
+        // Send form data to our Vercel API endpoint
+        const response = await fetch('/api/project-intake', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(templateParams)
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to submit form');
+        }
+        
+        const result = await response.json();
+        console.log('Form submitted successfully:', result);
+        
+        // Show success message
+        successMsg.style.display = 'block';
+        
+        // Reset form
+        e.target.reset();
+        
+        // Scroll to success message
+        successMsg.scrollIntoView({ behavior: 'smooth' });
+        
+      } catch (error) {
+        console.log('FAILED...', error);
+        console.log('Error details:', error.message);
+        
+        // Show error message
+        errorMsg.style.display = 'block';
+        
+        // Scroll to error message
+        errorMsg.scrollIntoView({ behavior: 'smooth' });
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Project Intake';
+      }
     });
   </script>
 </body>

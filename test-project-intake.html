@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Project Intake API</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .test-form { max-width: 500px; }
+    input, textarea { width: 100%; margin: 10px 0; padding: 8px; }
+    button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+    .result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+  <h1>Test Project Intake API</h1>
+  
+  <div class="test-form">
+    <h3>Test Form Data</h3>
+    <input type="text" id="brand-logo" placeholder="Brand Logo URL" value="https://example.com/logo.png">
+    <input type="text" id="brand-fonts" placeholder="Brand Fonts" value="Arial, Helvetica">
+    <input type="text" id="brand-colors" placeholder="Brand Colors" value="#FFB200, #000000">
+    <textarea id="page-content" placeholder="Page Content" rows="3">Home, About, Contact, Listings</textarea>
+    
+    <button onclick="testAPI()">Test API Endpoint</button>
+    
+    <div id="result" class="result" style="display: none;"></div>
+  </div>
+
+  <script>
+    async function testAPI() {
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'block';
+      resultDiv.className = 'result';
+      resultDiv.textContent = 'Testing...';
+      
+      try {
+        const testData = {
+          'brand-logo': document.getElementById('brand-logo').value,
+          'brand-fonts': document.getElementById('brand-fonts').value,
+          'brand-colors': document.getElementById('brand-colors').value,
+          'page-content': document.getElementById('page-content').value
+        };
+        
+        console.log('Testing with data:', testData);
+        
+        const response = await fetch('/api/project-intake', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(testData)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          resultDiv.className = 'result success';
+          resultDiv.innerHTML = `
+            <strong>✅ Success!</strong><br>
+            Message: ${result.message}<br>
+            Response: ${JSON.stringify(result, null, 2)}
+          `;
+        } else {
+          resultDiv.className = 'result error';
+          resultDiv.innerHTML = `
+            <strong>❌ Error!</strong><br>
+            Status: ${response.status}<br>
+            Error: ${result.error}<br>
+            Details: ${result.details || 'None'}
+          `;
+        }
+        
+      } catch (error) {
+        resultDiv.className = 'result error';
+        resultDiv.innerHTML = `
+          <strong>❌ Network Error!</strong><br>
+          Error: ${error.message}
+        `;
+        console.error('Test failed:', error);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -150,8 +150,8 @@
       <label for="mls-region">Which MLS region do you use?</label>
       <input id="mls-region" name="mls-region" placeholder="e.g. FMLS, Georgia MLS, Bright MLS" />
 
-      <label for="mls-login">MLS/IDX Portal Login Email</label>
-      <input type="email" id="mls-login" name="mls-login" placeholder="agent@yourdomain.com" />
+      <label for="mls-login">MLS/IDX Portal Login (Email or Username)</label>
+      <input id="mls-login" name="mls-login" placeholder="agent@yourdomain.com or username" />
 
       <label for="mls-api">MLS API Key / IDX Token (optional)</label>
       <input id="mls-api" name="mls-api" placeholder="Paste API key or token here" />
@@ -169,6 +169,27 @@
 
       <label for="crm-tool">Do you use a CRM or lead management platform?</label>
       <input id="crm-tool" name="crm-tool" placeholder="e.g. FollowUpBoss, LionDesk, Real Geeks" />
+
+      <label for="crm-login">CRM Login (Email or Username)</label>
+      <input id="crm-login" name="crm-login" placeholder="agent@yourdomain.com or username" />
+
+      <label for="cms-login">CMS/Website Admin Login (Email or Username)</label>
+      <input id="cms-login" name="cms-login" placeholder="admin@yourdomain.com or username" />
+
+      <label for="current-platform">What platform currently hosts your website?</label>
+      <select id="current-platform" name="current-platform">
+        <option value="">Select one</option>
+        <option>Wix</option>
+        <option>Shopify</option>
+        <option>WordPress</option>
+        <option>Squarespace</option>
+        <option>GoDaddy Website Builder</option>
+        <option>Custom/Other</option>
+        <option>No current website</option>
+      </select>
+
+      <label for="platform-details">If other platform or custom, please specify:</label>
+      <input id="platform-details" name="platform-details" placeholder="e.g. Custom PHP, Drupal, etc." />
     </div>
 
     <!-- PHASE 3 — Content & QA -->
